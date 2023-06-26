@@ -17,99 +17,37 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     @ObservedObject private var viewModel = testViewModel()
     var body: some View {
-        VStack{
-//            ALL Content will go in here
-//            Image and logo to be in the VSTACK below
-            VStack{
-                Text("Discover")
-            }
-            .frame(height: 140)
-            .background(Color.blue)
-            VStack(alignment: .leading){
-                Text("Discover")
-                    .frame(
-                        minWidth: 0,
-                        maxWidth: .infinity
-                    )
-//                    .background(Color.orange)
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: 28, weight: .bold, design: .monospaced))
-                SearchInput(text: .constant(""))
-                    
-            }
-            .padding(.horizontal, 35)
-            
-            VStack{
-                ZStack{
-                    Image("CountryBg")
-                        .resizable()
-                        .scaledToFit()
-                        .edgesIgnoringSafeArea(.all)
-//                        .frame(
-//                            minWidth: 0,
-//                            maxWidth: .infinity,
-//                            minHeight: 0,
-//                            maxHeight: 350
-//                        )
-                    
-                    GeometryReader { geometry in
-                        Image("purple-pin")
-                            .resizable()
-                            .offset(y: 6)
-                            .offset(x: 0)
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: 35,
-                                minHeight: 0,
-                                maxHeight: 50
-                            )
-                            .rotationEffect(.degrees(-38))
-                    }
-                    
-                    VStack(spacing: 10){
-                        Image("SAFLAG")
-                            .resizable()
-                            .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: 270,
-                                minHeight: 0,
-                                maxHeight: 200
-                            )
-                        
-                        Text("Country name")
-                            .font(.system(size: 24, weight: .bold, design: .monospaced))
-                    }
-                    
-                }
-     
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    
-                    maxHeight: 400
-                )
-           
-            }
-//            .background(<#T##Background#>)
-        }
-        .frame(
-          minWidth: 0,
-          maxWidth: .infinity,
-          minHeight: 0,
-          maxHeight: .infinity,
-          alignment: .topLeading
-        )
-        .padding(15)
-    
-//        List(viewModel.testData){ test in
-//            VStack(alignment : .leading){
-//                Text(test.name).font(.title)
+//        NavigationView {
+//            List {
+//                ForEach(items) { item in
+//                    NavigationLink {
+//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+//                    } label: {
+//                        Text(item.timestamp!, formatter: itemFormatter)
+//                    }
+//                }
+//                .onDelete(perform: deleteItems)
 //            }
-//        }.onAppear(){
-//            self.viewModel.fetchData()
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
+//                ToolbarItem {
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+//                }
+//            }
+//            Text("Select an item")
 //        }
+    
+        List(viewModel.testData){ test in
+            VStack(alignment : .leading){
+                Text(test.name).font(.title)
+            }
+        }.onAppear(){
+            self.viewModel.fetchData()
+        }
         
     }
 
