@@ -15,7 +15,7 @@ struct splashView: View {
         VStack() {
             // Top Map
             VStack() {
-                Image(uiImage: 'map')
+                Image("map")
             }
             
             // Text
