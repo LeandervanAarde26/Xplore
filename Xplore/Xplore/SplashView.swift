@@ -7,26 +7,29 @@
 
 import Foundation
 import SwiftUI
+import SwiftSVG
 
 struct splashView: View {
     
     var body: some View {
 //        Outer Container Stack
         VStack() {
-            // Top Map
-            VStack() {
-                Image("map")
-            }
+            TopMap()
             
-            // Text
-            HStack() {
-                
-            }
+            try SVG.make(with: "Test")
             
-            // Bottom Map
-            VStack() {
+            
+            
+            
+            Image("Icon")
+                .interpolation(.none)
+                .resizable()
+                .scaledToFit()
+                .padding(100)
                 
-            }
+            
+            BottomMap()
         }
+        .frame(maxWidth: .infinity)
     }
 }

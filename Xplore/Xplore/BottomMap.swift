@@ -1,5 +1,5 @@
 //
-//  TopMap.swift
+//  BottomMap.swift
 //  Xplore
 //
 //  Created by Vian du Plessis on 2023/06/26.
@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct TopMap: View {
+struct BottomMap: View {
     @State var bouncePin = false
-    
     var body: some View {
         VStack() {
+            Spacer()
             ZStack() {
                 Image("map")
+                    .rotationEffect(.degrees(180))
                 
                 Image("purple-pin")
-                    .offset(x: 90, y: bouncePin ? -70 : -60)
+                    .offset(x: 80, y: bouncePin ? -70 : -60)
                     .animation(Animation.easeInOut(duration: 1.0).repeatForever())
                 Image("shadow")
                     .offset(x: 115, y: -20)
@@ -35,23 +36,23 @@ struct TopMap: View {
                     .offset(x: 25, y: 10)
                 
                 Image("dark-blue-pin")
-                    .offset(x: 140, y: bouncePin ? 30 : 20)
+                    .offset(x: 115, y: bouncePin ? 10 : 0)
                     .animation(Animation.easeInOut(duration: 1.0).repeatForever())
                 Image("shadow")
-                    .offset(x: 165, y: 60)
+                    .offset(x: 145, y: 40)
             
             }
-            Spacer()
+
         }
         .onAppear {
             bouncePin = true
         }
-        .padding(.top)
+        .padding(.bottom)
     }
 }
 
-struct TopMap_Previews: PreviewProvider {
+struct BottomMap_Previews: PreviewProvider {
     static var previews: some View {
-        TopMap()
+        BottomMap()
     }
 }
