@@ -14,12 +14,12 @@ struct splashView: View {
     var body: some View {
 //        Outer Container Stack
         VStack() {
+
             TopMap()
             
             try SVG.make(with: "Test")
             
-            
-            
+           
             
             Image("Icon")
                 .interpolation(.none)
