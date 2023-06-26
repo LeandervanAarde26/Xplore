@@ -10,6 +10,8 @@ import SwiftUI
 struct LoginView: View {
     
     @State var Error = ""
+    @State var Email = ""
+    @State var Password = ""
 
     var body: some View {
         VStack(){
@@ -24,8 +26,8 @@ struct LoginView: View {
             
             Spacer()
             VStackLayout(spacing: 40){
-                TextFieldComp(textInput: .constant(""), failed: .constant("true"))
-                TextFieldComp(textInput: .constant(""), failed: .constant("false"))
+                TextFieldComp(textInput: .constant(Email), failed: .constant("true"))
+                TextFieldComp(textInput: .constant(Password), failed: .constant("false"))
             }
             Spacer()
             Text(Error)

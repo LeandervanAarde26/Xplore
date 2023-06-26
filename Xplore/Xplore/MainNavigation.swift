@@ -15,8 +15,8 @@ struct MainNavigation: View {
                 Label("Home", systemImage: "house")
             }
             
-            LoginView()
-            .tabItem{
+            Text("Countries")
+                .tabItem{
                 Label("Countries", systemImage: "globe.europe.africa")
             }
             
