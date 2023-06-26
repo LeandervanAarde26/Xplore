@@ -41,7 +41,7 @@ struct LoginView: View {
                 .padding(.horizontal, 35)
                 .padding(.vertical, 14)
                 .background(Color(red: 0.48, green: 0.53, blue: 0.95))
-                .clipShape(Capsule())
+                .cornerRadius(10)
             
             Spacer()
         }
