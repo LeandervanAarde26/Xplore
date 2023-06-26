@@ -11,31 +11,18 @@ struct TextFieldComp: View {
     @Binding var textInput: String
     @Binding var failed: String
     
-    @State var Icon: String = ""
-    
     var body: some View {
         VStack(){
             HStack(spacing: 20){
                 TextField("Placeholder", text: $textInput)
                     .background(.white)
                 
-                if failed == "true" {
-                    Icon = "xmark.circle.fill"
-                } else if failed == "false" {
-                    Icon = "checkmark.circle.fill"
-                } else if failed == "" {
-                    Icon = ""
-                }
-                
-                if !failed.isEmpty {
-                    Image(systemName: Icon)
+                Image(systemName: failed == "false" ? "xmark.circle.fill" : failed == "true" ? "checkmark.circle.fill" : "")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 20)
-                        .foregroundColor(Color.red)
+                        .foregroundColor( failed == "false" ? Color.red : failed == "true" ? Color.green : Color.gray)
                         .opacity(0.5)
-                }
-
                 
             }.padding(.bottom, 10).padding(.horizontal, 10)
             Divider()
