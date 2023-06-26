@@ -17,15 +17,16 @@ struct splashView: View {
 
             TopMap()
             
-            try SVG.make(with: "Test")
-            
+            VStack() {
+                Image("Icon")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(50)
+            }
+            .frame(maxWidth: .infinity)
            
             
-            Image("Icon")
-                .interpolation(.none)
-                .resizable()
-                .scaledToFit()
-                .padding(100)
+
                 
             
             BottomMap()

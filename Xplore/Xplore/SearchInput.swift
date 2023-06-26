@@ -16,9 +16,7 @@ struct SearchInput: View {
             TextField(
                 "Search Country",
                 text: $text
-                
-            )
-            
+                )
             .frame(height: 48)
             .padding(.horizontal, 15)
             
@@ -38,4 +36,5 @@ struct SearchInput_Previews: PreviewProvider {
         SearchInput(text: .constant(""))
     }
 }
+
 

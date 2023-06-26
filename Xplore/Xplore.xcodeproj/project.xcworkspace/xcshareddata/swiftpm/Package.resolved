@@ -107,6 +107,33 @@
         "revision" : "f25867a208f459d3c5a06935dceb9083b11cd539",
         "version" : "1.22.0"
       }
+    },
+    {
+      "identity" : "swift2d",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/richardpiazza/Swift2D.git",
+      "state" : {
+        "revision" : "f9e993c0075013339c5c132ab01fc78750b8774f",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "swiftsvg",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/richardpiazza/SwiftSVG.git",
+      "state" : {
+        "revision" : "2f5b4418f49b56c95265ae5ada1ef6bd8cccec68",
+        "version" : "0.10.0"
+      }
+    },
+    {
+      "identity" : "xmlcoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CoreOffice/XMLCoder.git",
+      "state" : {
+        "revision" : "b1e944cbd0ef33787b13f639a5418d55b3bed501",
+        "version" : "0.17.1"
+      }
     }
   ],
   "version" : 2

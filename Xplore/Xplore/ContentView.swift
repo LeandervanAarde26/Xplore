@@ -21,10 +21,10 @@ struct ContentView: View {
 //            ALL Content will go in here
 //            Image and logo to be in the VSTACK below
             VStack{
-                Text("Discover")
+                TopMap()
             }
             .frame(height: 140)
-            .background(Color.blue)
+          
             VStack(alignment: .leading){
                 Text("Discover")
                     .frame(
