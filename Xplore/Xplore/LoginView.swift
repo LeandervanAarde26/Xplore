@@ -22,8 +22,6 @@ struct LoginView: View {
                 Image("purple-pin").resizable().scaledToFit().frame(width: 25)
                 Text("Login").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
             }.padding(.top, 40)
-        
-            
             Spacer()
             VStackLayout(spacing: 40){
                 TextFieldComp(textInput: .constant(Email), failed: .constant("true"))
@@ -42,7 +40,7 @@ struct LoginView: View {
                 .padding(.vertical, 14)
                 .background(Color(red: 0.48, green: 0.53, blue: 0.95))
                 .cornerRadius(10)
-            
+                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
             Spacer()
         }
         
