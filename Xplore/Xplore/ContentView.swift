@@ -40,7 +40,7 @@ struct ContentView: View {
 //            }
 //            Text("Select an item")
 //        }
-        Text("LeanderVianRein")
+    
         List(viewModel.testData){ test in
             VStack(alignment : .leading){
                 Text(test.name).font(.title)
@@ -48,6 +48,7 @@ struct ContentView: View {
         }.onAppear(){
             self.viewModel.fetchData()
         }
+        
     }
 
     private func addItem() {
