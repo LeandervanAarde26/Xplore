@@ -10,25 +10,25 @@ import SwiftUI
 struct MainNavigation: View {
     var body: some View {
         TabView{
-          ContentView()
-                .tabItem{
-                    Label("Home", systemImage: "house")
-                }
-                .accentColor(Color.purple)
+            ContentView()
+            .tabItem{
+                Label("Home", systemImage: "house")
+            }
+            
             Text("Countries")
-                .tabItem{
-                    Label("Countries", systemImage: "globe.europe.africa")
-                }
+            .tabItem{
+                Label("Countries", systemImage: "globe.europe.africa")
+            }
             
             Text("Favorites")
-                .tabItem{
-                    Label("Favorites", systemImage: "heart")
-                }
+            .tabItem{
+                Label("Favorites", systemImage: "heart")
+            }
             
             Text("Feed")
-                .tabItem{
-                    Label("Feed", systemImage: "note.text")
-                }
+            .tabItem{
+                Label("Feed", systemImage: "note.text")
+            }
         }
     }
 }
