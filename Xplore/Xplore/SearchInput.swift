@@ -30,14 +30,6 @@ struct SearchInput: View {
         .padding(.horizontal, 6)
         .cornerRadius(8)
         .background(Color(.systemGray6).clipShape(RoundedRectangle(cornerRadius:12)))
-     
-//        .background(Color(.systemGray6))
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 8)
-//                .stroke(lineWidth: 0.1)
-//        )
-        
-        
     }
 }
 
@@ -46,3 +38,4 @@ struct SearchInput_Previews: PreviewProvider {
         SearchInput(text: .constant(""))
     }
 }
+
