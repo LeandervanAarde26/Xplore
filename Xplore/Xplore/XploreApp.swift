@@ -23,7 +23,7 @@ struct XploreApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainNavigation()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

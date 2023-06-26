@@ -13,8 +13,10 @@ struct splashView: View {
     var body: some View {
 //        Outer Container Stack
         VStack() {
+
             TopMap()
             
+
             VStack() {
                 Image("Icon")
                     .resizable()
@@ -23,7 +25,7 @@ struct splashView: View {
                     .padding(50)
             }
             .frame(maxWidth: .infinity)
-        
+    
             BottomMap()
         }
         .frame(maxWidth: .infinity)
