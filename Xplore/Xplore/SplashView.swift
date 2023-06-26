@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import SwiftSVG
 
 struct splashView: View {
     
@@ -16,18 +15,15 @@ struct splashView: View {
         VStack() {
             TopMap()
             
-            try SVG.make(with: "Test")
-            
-            
-            
-            
-            Image("Icon")
-                .interpolation(.none)
-                .resizable()
-                .scaledToFit()
-                .padding(100)
-                
-            
+            VStack() {
+                Image("Icon")
+                    .resizable()
+                    .scaledToFit()
+    //                .padding(100)
+                    .padding(50)
+            }
+            .frame(maxWidth: .infinity)
+        
             BottomMap()
         }
         .frame(maxWidth: .infinity)
