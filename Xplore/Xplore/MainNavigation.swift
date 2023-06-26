@@ -16,7 +16,7 @@ struct MainNavigation: View {
             }
             
             Text("Countries")
-            .tabItem{
+                .tabItem{
                 Label("Countries", systemImage: "globe.europe.africa")
             }
             
