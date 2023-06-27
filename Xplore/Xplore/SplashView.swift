@@ -14,7 +14,6 @@ struct splashView: View {
     var body: some View {
 //        Outer Container Stack
         VStack() {
-
             TopMap()
             
             VStack() {
@@ -25,10 +24,6 @@ struct splashView: View {
             }
             .frame(maxWidth: .infinity)
            
-            
-
-                
-            
             BottomMap()
         }
         .frame(maxWidth: .infinity)

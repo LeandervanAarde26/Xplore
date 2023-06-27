@@ -23,10 +23,10 @@
 		6E55833F2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55833E2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift */; };
 		6E9358BA2A49C146007FBED6 /* SearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9358B92A49C146007FBED6 /* SearchInput.swift */; };
 		6E9574C22A49C6BD009C3CF6 /* MainNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9574C12A49C6BD009C3CF6 /* MainNavigation.swift */; };
-		801D7B542A49CBC300CBF82E /* BottomMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801D7B532A49CBC300CBF82E /* BottomMap.swift */; };
-		801D7B562A49CBC900CBF82E /* TopMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801D7B552A49CBC900CBF82E /* TopMap.swift */; };
 		80A4071A2A49CE1100959AEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A407192A49CE1100959AEC /* LoginView.swift */; };
 		80A4071C2A49CE5800959AEC /* TextFieldComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A4071B2A49CE5800959AEC /* TextFieldComp.swift */; };
+		D666FBF92A4AB660005509DD /* BottomMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D666FBF82A4AB660005509DD /* BottomMap.swift */; };
+		D666FBFB2A4AB67A005509DD /* TopMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D666FBFA2A4AB67A005509DD /* TopMap.swift */; };
 		D6B6F3082A458B24004520E2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F3072A458B24004520E2 /* FirebaseAuth */; };
 		D6B6F30A2A458B24004520E2 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F3092A458B24004520E2 /* FirebaseAuthCombine-Community */; };
 		D6B6F30C2A458B24004520E2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F30B2A458B24004520E2 /* FirebaseDatabase */; };
@@ -78,10 +78,10 @@
 		6E55833E2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XploreUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6E9358B92A49C146007FBED6 /* SearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInput.swift; sourceTree = "<group>"; };
 		6E9574C12A49C6BD009C3CF6 /* MainNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigation.swift; sourceTree = "<group>"; };
-		801D7B532A49CBC300CBF82E /* BottomMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BottomMap.swift; path = ../../../../../Downloads/BottomMap.swift; sourceTree = "<group>"; };
-		801D7B552A49CBC900CBF82E /* TopMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopMap.swift; path = ../../../../../Downloads/TopMap.swift; sourceTree = "<group>"; };
 		80A407192A49CE1100959AEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		80A4071B2A49CE5800959AEC /* TextFieldComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComp.swift; sourceTree = "<group>"; };
+		D666FBF82A4AB660005509DD /* BottomMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMap.swift; sourceTree = "<group>"; };
+		D666FBFA2A4AB67A005509DD /* TopMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMap.swift; sourceTree = "<group>"; };
 		D6C3BE382A496B710054D9A8 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		D6C3BE3C2A4986FF0054D9A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,12 +164,12 @@
 		6E4EA3372A49669C00F8819F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				801D7B532A49CBC300CBF82E /* BottomMap.swift */,
-				801D7B552A49CBC900CBF82E /* TopMap.swift */,
 				6E4EA33C2A49679300F8819F /* tester.swift */,
 				6E9358B92A49C146007FBED6 /* SearchInput.swift */,
 				6E9574C12A49C6BD009C3CF6 /* MainNavigation.swift */,
 				80A4071B2A49CE5800959AEC /* TextFieldComp.swift */,
+				D666FBF82A4AB660005509DD /* BottomMap.swift */,
+				D666FBFA2A4AB67A005509DD /* TopMap.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -411,13 +411,13 @@
 				6E4EA3402A4967AD00F8819F /* Another_test.swift in Sources */,
 				80A4071C2A49CE5800959AEC /* TextFieldComp.swift in Sources */,
 				6E9358BA2A49C146007FBED6 /* SearchInput.swift in Sources */,
-				801D7B542A49CBC300CBF82E /* BottomMap.swift in Sources */,
 				6E34CD972A45908900E1C8CD /* TestModel.swift in Sources */,
-				801D7B562A49CBC900CBF82E /* TopMap.swift in Sources */,
 				6E55831F2A45847100FCDBD4 /* ContentView.swift in Sources */,
+				D666FBF92A4AB660005509DD /* BottomMap.swift in Sources */,
 				6E55831D2A45847100FCDBD4 /* XploreApp.swift in Sources */,
 				D6C3BE392A496B710054D9A8 /* SplashView.swift in Sources */,
 				6E4EA33D2A49679300F8819F /* tester.swift in Sources */,
+				D666FBFB2A4AB67A005509DD /* TopMap.swift in Sources */,
 				6E4EA33B2A49678600F8819F /* test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
