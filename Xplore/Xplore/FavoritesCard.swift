@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct FavoritesCard: View {
     var body: some View {
         HStack{
@@ -41,10 +43,7 @@ struct FavoritesCard: View {
         maxWidth: .infinity,
         minHeight: 0,
         maxHeight: 90)
-        
-     
-    }
- 
+    } 
 }
 
 struct FavoritesCard_Previews: PreviewProvider {
