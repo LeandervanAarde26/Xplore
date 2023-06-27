@@ -10,11 +10,12 @@ import SwiftUI
 struct TextFieldComp: View {
     @Binding var textInput: String
     @Binding var failed: String
+    @Binding var placeholder: String
     
     var body: some View {
         VStack(){
             HStack(spacing: 20){
-                TextField("Placeholder", text: $textInput)
+                TextField(placeholder, text: $textInput)
                     .background(.white)
                 
                 Image(systemName: failed == "false" ? "xmark.circle.fill" : failed == "true" ? "checkmark.circle.fill" : "")
@@ -37,6 +38,6 @@ struct TextFieldComp: View {
 
 struct TextFieldComp_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldComp(textInput: .constant(""), failed: .constant("true"))
+        TextFieldComp(textInput: .constant(""), failed: .constant("true"), placeholder: .constant("placeholder"))
     }
 }

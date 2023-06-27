@@ -37,9 +37,11 @@ struct LoginView: View {
             
             VStackLayout(spacing: 40){
                 TextFieldComp(textInput: .constant(Email),
-                              failed: .constant("true"))
+                              failed: .constant("true"),
+                              placeholder: .constant("email"))
                 TextFieldComp(textInput: .constant(Password),
-                              failed: .constant("false"))
+                              failed: .constant("false"),
+                              placeholder: .constant("password"))
             }
             
             Spacer()
