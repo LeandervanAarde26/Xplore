@@ -21,7 +21,7 @@ struct MainNavigation: View {
                 Label("Countries", systemImage: "globe.europe.africa")
             }
             
-            Text("Favorites")
+            CountryDetailView()
             .tabItem{
                 Label("Favorites", systemImage: "heart")
             }
