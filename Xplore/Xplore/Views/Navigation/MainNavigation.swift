@@ -21,12 +21,12 @@ struct MainNavigation: View {
                 Label("Countries", systemImage: "globe.europe.africa")
             }
             
-            FavouritesView()
+            CountryDetailView()
             .tabItem{
                 Label("Favorites", systemImage: "heart")
             }
             
-            FeedView()
+            Text("Feed")
             .tabItem{
                 Label("Feed", systemImage: "note.text")
             }
@@ -37,5 +37,6 @@ struct MainNavigation: View {
 struct MainNavigation_Previews: PreviewProvider {
     static var previews: some View {
         MainNavigation()
+          
     }
 }
