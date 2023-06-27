@@ -8,17 +8,47 @@
 import SwiftUI
 
 struct SearchDropdown: View {
-    var names = ["One", "Two", "Three", "Four"]
+    struct Person: Identifiable {
+            let id: UUID
+            let name: String
+        }
+    let names: [Person] = [
+            Person(id: UUID(), name: "John"),
+            Person(id: UUID(), name: "Jane"),
+            Person(id: UUID(), name: "Alice"),
+            Person(id: UUID(), name: "Vian"),
+            Person(id: UUID(), name: "Reinhardt"),
+            Person(id: UUID(), name: "Leander")
+        ]
+    
     var body: some View {
         VStack(){
-            Text("Hello")
+            List(names) { name in
+                HStack {
+                    Image("SAFLAG")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(
+                            minWidth: 0,
+                            maxWidth: 40,
+                            minHeight: 0,
+                            maxHeight: 70
+                        )
+                        .frame(width: 40, height: 40) // Adjust the width and height of the image as needed
+                    Spacer()
+                    Text(name.name)
+                    Spacer()
+                }
+            }
+            .listStyle(PlainListStyle()) // Optional:
+            .background(Color.clear)
         }
-        .background(Color.red)
+        .background(Color.clear)
         .frame(
-            minWidth: .infinity,
+        minWidth: 0,
         maxWidth: .infinity,
         minHeight: 20,
-        maxHeight: 200)
+        maxHeight: 500)
     }
 }
 
