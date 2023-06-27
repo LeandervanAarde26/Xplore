@@ -28,6 +28,9 @@
 		6EC3B6CF2A4ADBDE00CB5259 /* SearchDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3B6BD2A4ADBDD00CB5259 /* SearchDropdown.swift */; };
 		6EC3B6D02A4ADBDE00CB5259 /* FavoritesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3B6BE2A4ADBDD00CB5259 /* FavoritesCard.swift */; };
 		6EC3B6D12A4ADBDE00CB5259 /* TextFieldComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3B6BF2A4ADBDD00CB5259 /* TextFieldComp.swift */; };
+		6EC3B6D42A4ADCB800CB5259 /* TopMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3B6D22A4ADCB800CB5259 /* TopMap.swift */; };
+		6EC3B6D52A4ADCB800CB5259 /* BottomMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3B6D32A4ADCB800CB5259 /* BottomMap.swift */; };
+		6EC3B6D72A4ADCF500CB5259 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EC3B6D62A4ADCF500CB5259 /* GoogleService-Info.plist */; };
 		D6B6F3082A458B24004520E2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F3072A458B24004520E2 /* FirebaseAuth */; };
 		D6B6F30A2A458B24004520E2 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F3092A458B24004520E2 /* FirebaseAuthCombine-Community */; };
 		D6B6F30C2A458B24004520E2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F30B2A458B24004520E2 /* FirebaseDatabase */; };
@@ -82,6 +85,9 @@
 		6EC3B6BD2A4ADBDD00CB5259 /* SearchDropdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDropdown.swift; sourceTree = "<group>"; };
 		6EC3B6BE2A4ADBDD00CB5259 /* FavoritesCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCard.swift; sourceTree = "<group>"; };
 		6EC3B6BF2A4ADBDD00CB5259 /* TextFieldComp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldComp.swift; sourceTree = "<group>"; };
+		6EC3B6D22A4ADCB800CB5259 /* TopMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMap.swift; sourceTree = "<group>"; };
+		6EC3B6D32A4ADCB800CB5259 /* BottomMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMap.swift; sourceTree = "<group>"; };
+		6EC3B6D62A4ADCF500CB5259 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,7 @@
 		6EC3B6A42A4ADBDD00CB5259 /* Xplore */ = {
 			isa = PBXGroup;
 			children = (
+				6EC3B6D62A4ADCF500CB5259 /* GoogleService-Info.plist */,
 				6EC3B6A52A4ADBDD00CB5259 /* test.swift */,
 				6EC3B6A62A4ADBDD00CB5259 /* Another_test.swift */,
 				6EC3B6A72A4ADBDD00CB5259 /* Persistence.swift */,
@@ -237,6 +244,8 @@
 		6EC3B6BB2A4ADBDD00CB5259 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6EC3B6D32A4ADCB800CB5259 /* BottomMap.swift */,
+				6EC3B6D22A4ADCB800CB5259 /* TopMap.swift */,
 				6EC3B6BC2A4ADBDD00CB5259 /* SearchInput.swift */,
 				6EC3B6BD2A4ADBDD00CB5259 /* SearchDropdown.swift */,
 				6EC3B6BE2A4ADBDD00CB5259 /* FavoritesCard.swift */,
@@ -367,6 +376,7 @@
 			files = (
 				6EC3B6C82A4ADBDE00CB5259 /* Preview Assets.xcassets in Resources */,
 				6EC3B6C42A4ADBDE00CB5259 /* Assets.xcassets in Resources */,
+				6EC3B6D72A4ADCF500CB5259 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +415,8 @@
 				6EC3B6C92A4ADBDE00CB5259 /* XploreApp.swift in Sources */,
 				6EC3B6CE2A4ADBDE00CB5259 /* SearchInput.swift in Sources */,
 				6EC3B6C02A4ADBDD00CB5259 /* test.swift in Sources */,
+				6EC3B6D42A4ADCB800CB5259 /* TopMap.swift in Sources */,
+				6EC3B6D52A4ADCB800CB5259 /* BottomMap.swift in Sources */,
 				6EC3B6CB2A4ADBDE00CB5259 /* LoginView.swift in Sources */,
 				6EC3B6C12A4ADBDE00CB5259 /* Another_test.swift in Sources */,
 			);
