@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SearchInput: View {
+    let names = ["Vian", "leander", "Reinhard", "Wiaan", "Reenen", "Bronwyn", "Sibu"]
+    @State var searchText = ""
 @Binding var text : String
     var body: some View {
         HStack{
@@ -16,19 +18,18 @@ struct SearchInput: View {
             TextField(
                 "Search Country",
                 text: $text
-                )
+            )
             .frame(height: 48)
             .padding(.horizontal, 15)
             
             Image(systemName: "mic.fill")
                 .foregroundColor(Color(.systemGray2))
-       
         }
-        
         .padding(.horizontal, 6)
         .cornerRadius(8)
         .background(Color(.systemGray6).clipShape(RoundedRectangle(cornerRadius:12)))
-    }
+        
+    }	
 }
 
 struct SearchInput_Previews: PreviewProvider {
