@@ -17,12 +17,12 @@ struct FavouritesView: View {
                 Image("light-blue-pin").resizable().scaledToFit().frame(width: 20).padding(.trailing, 20).padding(.top, 5)
                 Text("Favourites").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53)).padding(.top, 5)
                 Spacer()
-            }.padding(.top, 10)
-            Divider().padding(.bottom, 20)
+            }.padding(.top, 10).padding(.bottom, 20)
             ScrollView(){
                 VStack(spacing: 35){
                     //favourite items
                     ForEach(0..<10) {
+                        Divider()
                         FavoritesCard(Country: .constant("Country Name"), SmallInfo: .constant("Small info"), ContextualType: .constant("Test \($0)"))
                     }
                 }.frame(
