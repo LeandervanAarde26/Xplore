@@ -15,22 +15,41 @@ struct LoginView: View {
 
     var body: some View {
         VStack(){
-//            Image(<#T##name: String##String#>)
-            Text("Logo placeholder").padding(20)
-            Image("map")
+            Image("Icon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 140, alignment: .center)
+                .padding(15)
+            
+            TopMap()
+            
             HStack(spacing: 60){
-                Image("purple-pin").resizable().scaledToFit().frame(width: 25)
-                Text("Login").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
+                Image("purple-pin")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25)
+                Text("Login")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
             }.padding(.top, 40)
+            
             Spacer()
+            
             VStackLayout(spacing: 40){
-                TextFieldComp(textInput: .constant(Email), failed: .constant("true"))
-                TextFieldComp(textInput: .constant(Password), failed: .constant("false"))
+                TextFieldComp(textInput: .constant(Email),
+                              failed: .constant("true"),
+                              placeholder: .constant("email"))
+                TextFieldComp(textInput: .constant(Password),
+                              failed: .constant("false"),
+                              placeholder: .constant("password"))
             }
+            
             Spacer()
+            
             Text(Error)
                 .foregroundColor(Color.red)
                 .padding( 15)
+            
             Button(){}label: {
                 Text("Login").bold()
             }
@@ -41,9 +60,10 @@ struct LoginView: View {
                 .background(Color(red: 0.48, green: 0.53, blue: 0.95))
                 .cornerRadius(10)
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
+            
             Spacer()
+            
         }
-        
     }
 }
 
