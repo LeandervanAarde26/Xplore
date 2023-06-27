@@ -41,7 +41,6 @@ struct TopMap: View {
                     .offset(x: 165, y: 60)
             
             }
-            Spacer()
         }
         .onAppear {
             bouncePin = true

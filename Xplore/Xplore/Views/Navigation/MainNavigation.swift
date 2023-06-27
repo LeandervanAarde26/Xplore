@@ -26,7 +26,7 @@ struct MainNavigation: View {
                 Label("Favorites", systemImage: "heart")
             }
             
-            Text("Feed")
+            FeedView()
             .tabItem{
                 Label("Feed", systemImage: "note.text")
             }
