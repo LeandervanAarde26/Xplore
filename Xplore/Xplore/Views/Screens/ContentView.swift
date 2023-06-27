@@ -40,8 +40,7 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal, 35)
-                Spacer().padding(20)
-                
+                Spacer().padding(.vertical, 30)
                 ZStack {
                     Image("CountryBg")
                         .resizable()
@@ -72,6 +71,7 @@ struct ContentView: View {
                 .zIndex(0)
             }
         }
+       
     }
 }
     //    private func addItem() {
