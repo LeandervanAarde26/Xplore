@@ -24,10 +24,13 @@ struct TextFieldComp: View {
                         .foregroundColor( failed == "false" ? Color.red : failed == "true" ? Color.green : Color.gray)
                         .opacity(0.5)
                 
-            }.padding(.bottom, 10).padding(.horizontal, 10)
+            }.padding(.bottom, 10)
+                .padding(.horizontal, 10)
+            
             Divider()
                 .frame(height: 0.5)
              .background(Color("AppGray"))
+            
         }.frame(width: 340, alignment: .topLeading)
     }
 }

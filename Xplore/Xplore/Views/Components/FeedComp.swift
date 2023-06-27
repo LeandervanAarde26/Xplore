@@ -17,16 +17,36 @@ struct FeedComp: View {
     var body: some View {
         VStack(){
             HStack(spacing: 10){
-                Image("SAFLAG").resizable().scaledToFit().frame(height: 45).clipShape(Circle())
+                
+                Image("SAFLAG")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 45)
+                    .clipShape(Circle())
+                
                 Text(Username)
-            }.frame(maxWidth: .infinity, alignment: .leading).padding(.bottom, 5)
+                    .font(.headline)
+                
+            }.frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 5)
             
-            Image("SAFLAG").resizable().frame(width: .infinity, height: 240).scaledToFit()
+            Image("SAFLAG")
+                .resizable()
+                .frame(width: .infinity, height: 240)
+                .scaledToFit()
             
             Text(Desc)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.body)
+                .padding()
             
             Divider()
-            Text(CountryName).padding(.bottom, 35).padding(.leading, 10).frame(maxWidth: .infinity, alignment: .leading).foregroundColor(Color.gray).font(.system(size: 14))
+            
+            Text(CountryName)
+                .padding(.bottom, 35)
+                .padding(.leading, 10)
+                .frame(maxWidth: .infinity, alignment: .leading).foregroundColor(Color.gray)
+                .font(.footnote)
         }
     }
 }
