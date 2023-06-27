@@ -15,9 +15,8 @@ struct LoginView: View {
 
     var body: some View {
         VStack(){
-//            Image(<#T##name: String##String#>)
-            Text("Logo placeholder").padding(20)
-            Image("map")
+            Image("Icon").resizable().scaledToFit().frame(width: 140, alignment: .center).padding(15)
+            TopMap()
             HStack(spacing: 60){
                 Image("purple-pin").resizable().scaledToFit().frame(width: 25)
                 Text("Login").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
@@ -43,7 +42,6 @@ struct LoginView: View {
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
             Spacer()
         }
-        
     }
 }
 

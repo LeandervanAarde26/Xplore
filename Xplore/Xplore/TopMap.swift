@@ -4,7 +4,6 @@ struct TopMap: View {
     @State private var bouncePin = false
     
     var body: some View {
-        Image("map")
         VStack() {
             ZStack() {
                 Image("map")
