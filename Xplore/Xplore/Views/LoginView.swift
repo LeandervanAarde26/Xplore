@@ -9,9 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State var Error = ""
-    @State var Email = ""
-    @State var Password = ""
+    @StateObject private var LogModel = InputLogData()
+    @StateObject private var ErrModel = InputErrors()
 
     var body: some View {
         VStack(){
@@ -29,24 +28,26 @@ struct LoginView: View {
                     .scaledToFit()
                     .frame(width: 25)
                 Text("Login")
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.system(.title, weight: .bold))
                     .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
             }.padding(.top, 40)
             
             Spacer()
             
             VStackLayout(spacing: 40){
-                TextFieldComp(textInput: .constant(Email),
+                TextFieldComp(textInput: $LogModel.Email,
                               failed: .constant("true"),
-                              placeholder: .constant("email"))
-                TextFieldComp(textInput: .constant(Password),
+                              placeholder: .constant("email"),
+                              errorMessage: $ErrModel.emailError)
+                TextFieldComp(textInput: $LogModel.Password,
                               failed: .constant("false"),
-                              placeholder: .constant("password"))
+                              placeholder: .constant("password"),
+                              errorMessage: $ErrModel.passwordError)
             }
             
             Spacer()
             
-            Text(Error)
+            Text(ErrModel.PageError)
                 .foregroundColor(Color.red)
                 .padding( 15)
             
