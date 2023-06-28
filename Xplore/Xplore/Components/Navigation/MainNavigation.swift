@@ -16,12 +16,13 @@ struct MainNavigation: View {
             }
             
 //            Text("Countries")
-            LoginView()
+            AddPostView()
                 .tabItem{
-                Label("Countries", systemImage: "globe.europe.africa")
+                Label("New Post", systemImage: "plus.circle.fill")
             }
             
-            CountryDetailView()
+//            CountryDetailView()
+            FavouritesView()
             .tabItem{
                 Label("Favorites", systemImage: "heart")
             }
