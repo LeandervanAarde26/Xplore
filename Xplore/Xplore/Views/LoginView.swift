@@ -13,7 +13,17 @@ struct LoginView: View {
     @StateObject private var ErrModel = InputErrors()
     
     func Login() {
-        print("Logging in")
+        //example code
+        if !LogModel.Email.isEmpty {
+            //Prints value from input
+            print(LogModel.Email)
+            
+        } else {
+            //sets page error
+            ErrModel.PageError = "Email is empty"
+            
+        }
+        
     }
 
     var body: some View {
@@ -27,7 +37,6 @@ struct LoginView: View {
             
                 TopMap()
                     .frame(height:220)
-//                    .background(.gray)
                 
                 HStack(spacing: 60){
                     Image("purple-pin")
@@ -59,17 +68,16 @@ struct LoginView: View {
                     .foregroundColor(Color.red)
                     .padding(10)
                 
-                Button(){}label: {
+                Button(){Login()} label: {
                     Text("Login").bold()
-                }
-                    .foregroundStyle(.white)
-                    .frame(width: 250, alignment: .center)
-                    .padding(.horizontal, 35)
-                    .padding(.vertical, 14)
-                    .background(Color(red: 0.48, green: 0.53, blue: 0.95))
-                    .cornerRadius(10)
-                    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
-                    .padding()
+                } .foregroundStyle(.white)
+                .frame(width: 250, alignment: .center)
+                .padding(.horizontal, 35)
+                .padding(.vertical, 14)
+                .background(Color(red: 0.48, green: 0.53, blue: 0.95))
+                .cornerRadius(10)
+                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
+                .padding()
                 
                     NavigationLink() {
                         RegisterView()
