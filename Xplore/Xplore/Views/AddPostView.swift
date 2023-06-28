@@ -11,7 +11,8 @@ struct AddPostView: View {
     var plaecholderCountries = ["South Africa", "France", "Italy", "United States"]
     @State var selectedCountry = "South Afica"
     @State private var description = ""
-    @State private var photoPicker =  PhotoPicker()
+    @State private var selectedImageURL: URL? = nil
+ 
     
     
     var body: some View {
@@ -43,7 +44,7 @@ struct AddPostView: View {
             Divider()
 
             Spacer()
-            photoPicker
+            PhotoPicker(imageUrl: $selectedImageURL)
             Spacer().frame(height: 40)
             VStack{
                 Text("Description")
@@ -67,8 +68,14 @@ struct AddPostView: View {
             .padding(.horizontal, 20)
             HStack{
                 
-                Button(action: {print("HEY", $photoPicker)}){
-                    Text("Clear post")
+                Button(action: {
+                    if let imageURL = selectedImageURL {
+                        print("Selected Image URL:", imageURL)
+                    } else {
+                        print("No image selected.")
+                    }
+                }) {
+                    Text("Log Image URL")
                 }
                 .buttonStyle(.borderless)
                 .frame(

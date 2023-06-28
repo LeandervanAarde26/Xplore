@@ -7,6 +7,7 @@
 import PhotosUI
 import SwiftUI
 struct PhotoPickermodel{
-      var avatarItem: PhotosPickerItem?
-      var avatarImage: Image? = Image("DefaultPhotoPicker")
+    var avatarItem: PhotosPickerItem?
+    var avatarImage: Image? = Image("DefaultPhotoPicker")
+    var imageUrl: URL?
 }

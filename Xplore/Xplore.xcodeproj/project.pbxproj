@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E16C9222A4C773C001E4A86 /* ImageUrlGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C9212A4C773C001E4A86 /* ImageUrlGetter.swift */; };
 		6E5583332A45847400FCDBD4 /* XploreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5583322A45847400FCDBD4 /* XploreTests.swift */; };
 		6E55833D2A45847400FCDBD4 /* XploreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55833C2A45847400FCDBD4 /* XploreUITests.swift */; };
 		6E55833F2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55833E2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E16C9212A4C773C001E4A86 /* ImageUrlGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUrlGetter.swift; sourceTree = "<group>"; };
 		6E5583192A45847100FCDBD4 /* Xplore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xplore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E55832E2A45847400FCDBD4 /* XploreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XploreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5583322A45847400FCDBD4 /* XploreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XploreTests.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				6EA1773D2A4B207D005B6B53 /* PhotoPicker.swift */,
 				6EFAA0BB2A4C56EE001B95FA /* AvatarImageView.swift */,
 				6EFAA0BD2A4C574A001B95FA /* PhotoSelectionView.swift */,
+				6E16C9212A4C773C001E4A86 /* ImageUrlGetter.swift */,
 			);
 			path = PhotoPicker;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				6EA177502A4B207E005B6B53 /* SplashView.swift in Sources */,
 				6EA1774D2A4B207E005B6B53 /* FavouritesView.swift in Sources */,
 				6EA1774F2A4B207E005B6B53 /* AddPostView.swift in Sources */,
+				6E16C9222A4C773C001E4A86 /* ImageUrlGetter.swift in Sources */,
 				6EA177592A4B207E005B6B53 /* TextFieldComp.swift in Sources */,
 				6EA1773F2A4B207E005B6B53 /* CountryDetailView.swift in Sources */,
 				6EA177462A4B207E005B6B53 /* TestViewModel.swift in Sources */,

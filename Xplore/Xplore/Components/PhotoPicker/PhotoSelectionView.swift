@@ -10,6 +10,7 @@ import _PhotosUI_SwiftUI
 
 struct PhotoSelectionView: View {
     @Binding var avatarItem: PhotosPickerItem?
+    @Binding var selectedImageURL: URL?
 
     var body: some View {
         PhotosPicker("Select avatar", selection: $avatarItem, matching: .images)
@@ -21,6 +22,6 @@ struct PhotoSelectionView: View {
 
 struct PhotoSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoSelectionView(avatarItem: .constant(nil))
+        PhotoSelectionView(avatarItem: .constant(nil), selectedImageURL: .constant(nil))
     }
 }
