@@ -1,2 +1,8 @@
 
-Xplore/Xplore.xcodeproj/xcuserdata/reinhardt@glucode.com.xcuserdatad/xcschemes/xcschememanagement.plist
+xcuserdata/
+
+xcschememanagement.plist
+
+.build/
+
+.DS_Store
