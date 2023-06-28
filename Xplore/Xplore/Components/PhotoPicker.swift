@@ -7,49 +7,65 @@
 import PhotosUI
 import SwiftUI
 
+
 struct PhotoPicker: View {
     @State private var avatarItem: PhotosPickerItem?
-    @State private var avatarImage: Image? = Image("SAFLAG")
-    var body: some View {
-        VStack() {
-            if let avatarImage {
-                avatarImage
-                    .resizable()
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .scaledToFill()
-                    .frame(
-                        minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: 100
-                    )
-                   
-            }
-            Spacer().padding(.vertical, 2).background(Color.blue)
-            PhotosPicker("Select avatar", selection: $avatarItem, matching: .images)
-        }
-        .padding(.horizontal, 20)
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: 200
-        )
-        .onChange(of: avatarItem) { _ in
-            Task {
-                if let data = try? await avatarItem?.loadTransferable(type: Data.self) {
-                    if let uiImage = UIImage(data: data) {
-                        avatarImage =
-                        Image(uiImage: uiImage)
-                        return
+    @State private var avatarImage: Image? = Image("DefaultPhotoPicker")
+    @State private var isShowingImagePicker = false
+
+        var body: some View {
+            VStack {
+  
+                VStack{
+                    if let avatarImage = avatarImage {
+                        avatarImage
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height / 3)
+                    } else {
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.gray)
+                            .frame(maxHeight: UIScreen.main.bounds.height / 5)
+                            .padding()
                     }
+
                 }
-                print("Failed")
+                .background(Color.white)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                
+                Spacer()
+                
+                PhotosPicker("Select avatar", selection: $avatarItem, matching: .images)
+                    .tint(.accentColor)
+                    .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height / 3)
+//                .controlSize(.large)
+                .buttonStyle(.borderedProminent)
+        
+
             }
+            
+            .onChange(of: avatarItem) { _ in
+                            Task {
+                                if let data = try? await avatarItem?.loadTransferable(type: Data.self) {
+                                    if let uiImage = UIImage(data: data) {
+                                        avatarImage = Image(uiImage: uiImage)
+                                        return
+                                    }
+                                }
+                                print("Failed")
+                            }
+                        }
+            .padding()
+            .frame(maxHeight: UIScreen.main.bounds.height / 3)
         }
     }
-}
-
 struct PhotoPicker_Previews: PreviewProvider {
     static var previews: some View {
         PhotoPicker()
