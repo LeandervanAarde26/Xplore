@@ -37,6 +37,7 @@
 		6EFAA0B72A4C5627001B95FA /* PhotoPickermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFAA0B62A4C5627001B95FA /* PhotoPickermodel.swift */; };
 		6EFAA0BC2A4C56EE001B95FA /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFAA0BB2A4C56EE001B95FA /* AvatarImageView.swift */; };
 		6EFAA0BE2A4C574A001B95FA /* PhotoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFAA0BD2A4C574A001B95FA /* PhotoSelectionView.swift */; };
+		6EFAA0C02A4C63F0001B95FA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFAA0BF2A4C63F0001B95FA /* PostModel.swift */; };
 		D6B6F3082A458B24004520E2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F3072A458B24004520E2 /* FirebaseAuth */; };
 		D6B6F30A2A458B24004520E2 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F3092A458B24004520E2 /* FirebaseAuthCombine-Community */; };
 		D6B6F30C2A458B24004520E2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D6B6F30B2A458B24004520E2 /* FirebaseDatabase */; };
@@ -100,6 +101,7 @@
 		6EFAA0B62A4C5627001B95FA /* PhotoPickermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickermodel.swift; sourceTree = "<group>"; };
 		6EFAA0BB2A4C56EE001B95FA /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		6EFAA0BD2A4C574A001B95FA /* PhotoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionView.swift; sourceTree = "<group>"; };
+		6EFAA0BF2A4C63F0001B95FA /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			children = (
 				6EA177252A4B207D005B6B53 /* TestModel.swift */,
 				6EFAA0B62A4C5627001B95FA /* PhotoPickermodel.swift */,
+				6EFAA0BF2A4C63F0001B95FA /* PostModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				6EA177552A4B207E005B6B53 /* TopMap.swift in Sources */,
 				6EA177582A4B207E005B6B53 /* BottomMap.swift in Sources */,
 				6EFAA0BC2A4C56EE001B95FA /* AvatarImageView.swift in Sources */,
+				6EFAA0C02A4C63F0001B95FA /* PostModel.swift in Sources */,
 				6EFAA0BE2A4C574A001B95FA /* PhotoSelectionView.swift in Sources */,
 				6EA177572A4B207E005B6B53 /* FavoritesCard.swift in Sources */,
 				6EA177432A4B207E005B6B53 /* Xplore.xcdatamodeld in Sources */,

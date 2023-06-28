@@ -10,6 +10,10 @@ import SwiftUI
 struct AddPostView: View {
     var plaecholderCountries = ["South Africa", "France", "Italy", "United States"]
     @State var selectedCountry = "South Afica"
+    @State private var description = ""
+    @State private var photoPicker =  PhotoPicker()
+    
+    
     var body: some View {
         VStack{
             HStack(alignment: .center){
@@ -37,30 +41,33 @@ struct AddPostView: View {
             }.padding(.vertical)
         
             Divider()
-//            Spacer()
+
             Spacer()
-            PhotoPicker()
+            photoPicker
             Spacer().frame(height: 40)
             VStack{
-                      TextField("Description", text: .constant(""))
-                          .padding( .vertical, 12)
-                          .padding(.horizontal, 10)
-                          .frame(minHeight: 100)
-                          .lineLimit(3)
-                          .background(Color(.systemGray6)
-                              .clipShape(RoundedRectangle(cornerRadius:12)))
-                      Picker("Country: ", selection: $selectedCountry) {
-                          ForEach(plaecholderCountries, id: \.self) { Country in
-                              Text(Country.capitalized)
-                          }
-                      }
-                      .frame(minHeight: 0, maxHeight: 115)
-                      .pickerStyle(.wheel)
+                Text("Description")
+                    .fontWeight(.regular)
+                    .font(.caption)
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                TextEditor(text: $description)
+                    .frame(maxHeight: 150)
+                    .background(Color(.systemGray6))
+                    .colorMultiply(Color(.systemGray6))
+                    .clipShape(RoundedRectangle(cornerRadius:12))
+                    
+                Picker("Country: ", selection: $selectedCountry) {
+                    ForEach(plaecholderCountries, id: \.self) { Country in
+                        Text(Country.capitalized)
+                    }
+                }
+                .frame(minHeight: 0, maxHeight: 115)
+                .pickerStyle(.wheel)
             }
             .padding(.horizontal, 20)
             HStack{
                 
-                Button(action: {print("Button pressed")}){
+                Button(action: {print("HEY", $photoPicker)}){
                     Text("Clear post")
                 }
                 .buttonStyle(.borderless)
