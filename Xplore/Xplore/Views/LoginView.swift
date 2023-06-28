@@ -13,17 +13,21 @@ struct LoginView: View {
     @StateObject private var ErrModel = InputErrors()
     
     func Login() {
-        //example code
+        //Model usage example code
         if !LogModel.Email.isEmpty {
-            //Prints value from input
+            //Value from email input
             print(LogModel.Email)
+            
+            //change all input icons
+            ErrModel.ErrIcon = "Yes"
             
         } else {
             //sets page error
-            ErrModel.PageError = "Email is empty"
+            //Check InputModels model for other available errors
+            ErrModel.PageError = "Password or email is incorrect"
+            ErrModel.emailError = "Email is empty"
             
         }
-        
     }
 
     var body: some View {
@@ -53,11 +57,11 @@ struct LoginView: View {
                 
                 VStackLayout(spacing: 40){
                     TextFieldComp(textInput: $LogModel.Email,
-                                  failed: .constant("true"),
+                                  failed: $ErrModel.ErrIcon,
                                   placeholder: .constant("email"),
                                   errorMessage: $ErrModel.emailError)
                     TextFieldComp(textInput: $LogModel.Password,
-                                  failed: .constant("false"),
+                                  failed: $ErrModel.ErrIcon,
                                   placeholder: .constant("password"),
                                   errorMessage: $ErrModel.passwordError)
                 }
@@ -68,9 +72,12 @@ struct LoginView: View {
                     .foregroundColor(Color.red)
                     .padding(10)
                 
-                Button(){Login()} label: {
+                Button(){
+                    Login()
+                } label: {
                     Text("Login").bold()
-                } .foregroundStyle(.white)
+                }
+                .foregroundStyle(.white)
                 .frame(width: 250, alignment: .center)
                 .padding(.horizontal, 35)
                 .padding(.vertical, 14)
@@ -79,14 +86,15 @@ struct LoginView: View {
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
                 .padding()
                 
-                    NavigationLink() {
-                        RegisterView()
-                    } label: {
-                        Text("Don't have an account?").foregroundColor(.blue)
-                    }
+                NavigationLink() {
+                    RegisterView()
+                } label: {
+                    Text("Don't have an account?")
+                        .foregroundColor(.blue)
                 }
-            
-                Spacer()
+            }
+        
+            Spacer()
         }
     }
 }

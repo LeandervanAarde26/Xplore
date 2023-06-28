@@ -19,11 +19,15 @@ struct TextFieldComp: View {
                 TextField(placeholder, text: $textInput)
                     .background(.white)
                 
-                Image(systemName: failed == "false" ? "xmark.circle.fill" : failed == "true" ? "checkmark.circle.fill" : "")
+                Image(systemName: !errorMessage.isEmpty ?
+                      "xmark.circle.fill" : errorMessage.isEmpty ? "" : "checkmark.circle.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 20)
-                        .foregroundColor( failed == "false" ? Color.red : failed == "true" ? Color.green : Color.gray)
+                        .foregroundColor(
+                            !errorMessage.isEmpty ?
+                            Color.red : errorMessage.isEmpty ?
+                            Color.green : Color.gray)
                         .opacity(0.5)
                 
             }.padding(.bottom, 5)
@@ -45,6 +49,9 @@ struct TextFieldComp: View {
 
 struct TextFieldComp_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldComp(textInput: .constant(""), failed: .constant("true"), placeholder: .constant("placeholder"), errorMessage: .constant("error message"))
+        TextFieldComp(textInput: .constant(""),
+                      failed: .constant("true"),
+                      placeholder: .constant("placeholder"),
+                      errorMessage: .constant(""))
     }
 }

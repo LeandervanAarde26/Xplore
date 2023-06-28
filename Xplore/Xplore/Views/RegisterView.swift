@@ -40,21 +40,21 @@ struct RegisterView: View {
                 VStack(spacing: 20){
                     PhotoPicker().frame(height: 320)
                     TextFieldComp(textInput: $RegModel.Username,
-                                  failed: .constant("false"),
+                                  failed: $ErrModel.ErrIcon,
                                   placeholder: .constant("username"),
                                   errorMessage: $ErrModel.usernameError)
                     TextFieldComp(textInput: $RegModel.Email,
-                                  failed: .constant("true"),
+                                  failed: $ErrModel.ErrIcon,
                                   placeholder: .constant("email"),
                                   errorMessage: $ErrModel.emailError)
                     TextFieldComp(textInput: $RegModel.Password,
-                                  failed: .constant("false"),
+                                  failed: $ErrModel.ErrIcon,
                                   placeholder: .constant("password"),
                                   errorMessage: $ErrModel.passwordError)
                     TextFieldComp(textInput: $RegModel.ConPassword,
-                                  failed: .constant("false"),
+                                  failed: $ErrModel.ErrIcon,
                                   placeholder: .constant("confirm password"),
-                                  errorMessage: .constant(ErrModel.passwordConError))
+                                  errorMessage: $ErrModel.passwordConError)
                 }
                 
                 Text(ErrModel.PageError)

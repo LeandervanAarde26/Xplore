@@ -10,6 +10,7 @@ import Foundation
 class InputErrors: ObservableObject {
     @Published var emailError: String = ""
     @Published var passwordError: String = ""
+    @Published var ErrIcon: String = ""
     @Published var passwordConError: String = ""
     @Published var usernameError: String = ""
     @Published var PageError: String = ""
