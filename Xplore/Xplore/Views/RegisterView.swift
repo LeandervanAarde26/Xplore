@@ -33,9 +33,12 @@ struct RegisterView: View {
                         .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
                 }.padding(10)
                 
+                Divider()
+                
                 Spacer()
                 
-                VStackLayout(spacing: 20){
+                VStack(spacing: 20){
+                    PhotoPicker().frame(height: 320)
                     TextFieldComp(textInput: $RegModel.Username,
                                   failed: .constant("false"),
                                   placeholder: .constant("username"),
@@ -53,8 +56,6 @@ struct RegisterView: View {
                                   placeholder: .constant("confirm password"),
                                   errorMessage: .constant(ErrModel.passwordConError))
                 }
-                
-                Spacer()
                 
                 Text(ErrModel.PageError)
                     .foregroundColor(Color.red)
