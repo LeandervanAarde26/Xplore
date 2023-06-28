@@ -11,20 +11,20 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @StateObject private var RegModel = InputRegData()
-    @StateObject private var ErrModel = InputErrors()
+    @StateObject private var regModel = InputRegData()
+    @StateObject private var errModel = InputErrors()
     
     func Register() {
         //Model usage example code
-        if !RegModel.Email.isEmpty {
+        if !regModel.Email.isEmpty {
             //Value from email input
-            print(RegModel.Email)
+            print(regModel.Email)
             
         } else {
             //sets page error
             //Check InputModels model for other available errors
-            ErrModel.PageError = "Fields can't be empty"
-            ErrModel.emailError = "Email is empty"
+            errModel.pageError = "Fields can't be empty"
+            errModel.emailError = "Email is empty"
             
         }
     }
@@ -54,25 +54,25 @@ struct RegisterView: View {
                 
                 VStack(spacing: 20){
                     PhotoPicker().frame(height: 320)
-                    TextFieldComp(textInput: $RegModel.Username,
-                                  failed: $ErrModel.ErrIcon,
+                    TextFieldComp(textInput: $regModel.Username,
+                                  failed: $errModel.errIcon,
                                   placeholder: .constant("username"),
-                                  errorMessage: $ErrModel.usernameError)
-                    TextFieldComp(textInput: $RegModel.Email,
-                                  failed: $ErrModel.ErrIcon,
+                                  errorMessage: $errModel.usernameError)
+                    TextFieldComp(textInput: $regModel.Email,
+                                  failed: $errModel.errIcon,
                                   placeholder: .constant("email"),
-                                  errorMessage: $ErrModel.emailError)
-                    TextFieldComp(textInput: $RegModel.Password,
-                                  failed: $ErrModel.ErrIcon,
+                                  errorMessage: $errModel.emailError)
+                    TextFieldComp(textInput: $regModel.Password,
+                                  failed: $errModel.errIcon,
                                   placeholder: .constant("password"),
-                                  errorMessage: $ErrModel.passwordError)
-                    TextFieldComp(textInput: $RegModel.ConPassword,
-                                  failed: $ErrModel.ErrIcon,
+                                  errorMessage: $errModel.passwordError)
+                    TextFieldComp(textInput: $regModel.ConPassword,
+                                  failed: $errModel.errIcon,
                                   placeholder: .constant("confirm password"),
-                                  errorMessage: $ErrModel.passwordConError)
+                                  errorMessage: $errModel.passwordConError)
                 }
                 
-                Text(ErrModel.PageError)
+                Text(errModel.pageError)
                     .foregroundColor(Color.red)
                     .padding( 15)
                 

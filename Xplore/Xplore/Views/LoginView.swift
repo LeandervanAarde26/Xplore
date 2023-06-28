@@ -9,20 +9,20 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @StateObject private var LogModel = InputLogData()
-    @StateObject private var ErrModel = InputErrors()
+    @StateObject private var logModel = InputLogData()
+    @StateObject private var errModel = InputErrors()
     
     func Login() {
         //Model usage example code
-        if !LogModel.Email.isEmpty {
+        if !logModel.Email.isEmpty {
             //Value from email input
-            print(LogModel.Email)
+            print(logModel.Email)
             
         } else {
             //sets page error
             //Check InputModels model for other available errors
-            ErrModel.PageError = "Password or email is incorrect"
-            ErrModel.emailError = "Email is empty"
+            errModel.pageError = "Password or email is incorrect"
+            errModel.emailError = "Email is empty"
             
         }
     }
@@ -53,19 +53,19 @@ struct LoginView: View {
                 Spacer()
                 
                 VStackLayout(spacing: 40){
-                    TextFieldComp(textInput: $LogModel.Email,
-                                  failed: $ErrModel.ErrIcon,
+                    TextFieldComp(textInput: $logModel.Email,
+                                  failed: $errModel.errIcon,
                                   placeholder: .constant("email"),
-                                  errorMessage: $ErrModel.emailError)
-                    TextFieldComp(textInput: $LogModel.Password,
-                                  failed: $ErrModel.ErrIcon,
+                                  errorMessage: $errModel.emailError)
+                    TextFieldComp(textInput: $logModel.Password,
+                                  failed: $errModel.errIcon,
                                   placeholder: .constant("password"),
-                                  errorMessage: $ErrModel.passwordError)
+                                  errorMessage: $errModel.passwordError)
                 }
                 
                 Spacer()
                 
-                Text(ErrModel.PageError)
+                Text(errModel.pageError)
                     .foregroundColor(Color.red)
                     .padding(10)
                 

@@ -10,10 +10,10 @@ import Foundation
 class InputErrors: ObservableObject {
     @Published var emailError: String = ""
     @Published var passwordError: String = ""
-    @Published var ErrIcon: String = ""
+    @Published var errIcon: String = ""
     @Published var passwordConError: String = ""
     @Published var usernameError: String = ""
-    @Published var PageError: String = ""
+    @Published var pageError: String = ""
 }
 
 class InputRegData: ObservableObject {
