@@ -20,7 +20,8 @@ struct TextFieldComp: View {
                     .background(.white)
                 
                 Image(systemName: !errorMessage.isEmpty ?
-                      "xmark.circle.fill" : errorMessage.isEmpty ? "" : "checkmark.circle.fill")
+                      "xmark.circle.fill" : errorMessage.isEmpty ?
+                      "" : "checkmark.circle.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 20)

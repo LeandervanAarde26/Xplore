@@ -18,9 +18,6 @@ struct LoginView: View {
             //Value from email input
             print(LogModel.Email)
             
-            //change all input icons
-            ErrModel.ErrIcon = "Yes"
-            
         } else {
             //sets page error
             //Check InputModels model for other available errors

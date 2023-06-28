@@ -13,6 +13,21 @@ struct RegisterView: View {
     
     @StateObject private var RegModel = InputRegData()
     @StateObject private var ErrModel = InputErrors()
+    
+    func Register() {
+        //Model usage example code
+        if !RegModel.Email.isEmpty {
+            //Value from email input
+            print(RegModel.Email)
+            
+        } else {
+            //sets page error
+            //Check InputModels model for other available errors
+            ErrModel.PageError = "Fields can't be empty"
+            ErrModel.emailError = "Email is empty"
+            
+        }
+    }
 
     var body: some View {
         ScrollView(){
@@ -61,7 +76,9 @@ struct RegisterView: View {
                     .foregroundColor(Color.red)
                     .padding( 15)
                 
-                Button(){}label: {
+                Button(){
+                    Register()
+                }label: {
                     Text("Register").bold()
                 }
                     .foregroundStyle(.white)
