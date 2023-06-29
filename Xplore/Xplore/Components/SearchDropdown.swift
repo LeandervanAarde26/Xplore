@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct SearchDropdown: View {
-    
     @ObservedObject private var countryData = countryViewModel()
     
     @Binding var searchTerm: String
     
+    var filteredCountries: [Country] {
+            guard !searchTerm.isEmpty else {
+                return countryData.countries
+            }
+
+            let lowercasedQuery = searchTerm.lowercased()
+
+            return countryData.countries.filter { singleCountry in
+                singleCountry.name?.common?.lowercased().contains(lowercasedQuery) ?? false
+            }
+        }
+
+    
     var body: some View {
         VStack(){
-            Text(searchTerm)
-            List(countryData.countries) { country in
+            List(filteredCountries) { country in
                 HStack {
                     AsyncImage(url: URL(string: country.flags?.png ?? "SAFLAG")) { image in
                         image.resizable()
@@ -29,24 +40,27 @@ struct SearchDropdown: View {
                             )
                             .frame(width: 40, height: 40) // Adjust the width and height of the image as needed/
                     } placeholder: {
-                        Image("SAFLAG")
-                            .aspectRatio(contentMode: .fit)
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: 40,
-                                minHeight: 0,
-                                maxHeight: 70
-                            )
-                            .frame(width: 40, height: 40)
+//                        Image("SAFLAG")
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(
+//                                minWidth: 0,
+//                                maxWidth: 40,
+//                                minHeight: 0,
+//                                maxHeight: 70
+//                            )
+//                            .frame(width: 40, height: 40)
                     }.frame(width: 40, height: 40)
                     
                     Spacer()
+                    
                     Text(country.name?.common ?? "Country Name")
+                    
                     Spacer()
                 }
             }
             .listStyle(PlainListStyle()) // Optional:
             .background(Color.clear)
+            .searchable(text: $searchTerm)
         }
         .background(Color.clear)
         .frame(

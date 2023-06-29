@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SearchInput: View {
     
-    let names = ["Vian", "leander", "Reinhard", "Wiaan", "Reenen", "Bronwyn", "Sibu"]
-    
     @State var searchText = ""
     @Binding var text : String
     @Binding var isSearching: Bool
