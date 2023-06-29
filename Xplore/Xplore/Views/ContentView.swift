@@ -10,74 +10,76 @@ import CoreData
 
 struct ContentView: View {
     @State private var isSearching = false
+    
     @ObservedObject private var countryData = countryViewModel()
     
     @State var searchTerm: String = ""
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                TopMap()
-                    .frame(height: 160)
-                
-                VStack(alignment: .leading) {
-                    Text("Discover")
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                        .font(.system(size: 28, weight: .bold, design: .monospaced))
+        NavigationView{
+            ScrollView {
+                VStack(spacing: 0) {
+                    TopMap()
+                        .frame(height: 160)
                     
-                    SearchInput(text: $searchTerm, isSearching: $isSearching)
+                    VStack(alignment: .leading) {
+                        Text("Discover")
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 28, weight: .bold, design: .monospaced))
                         
-                    
-                    if isSearching {
-                        GeometryReader { geometry in
-                            HStack {
-                                Spacer()
-                                SearchDropdown(searchTerm: $searchTerm)
-                                Spacer()
+                        SearchInput(text: $searchTerm, isSearching: $isSearching, Data: $countryData.countries)
+                            
+                        
+                        if searchTerm.count > 0 {
+                            GeometryReader { geometry in
+                                HStack {
+                                    Spacer()
+                                    SearchDropdown(searchTerm: $searchTerm, Data: $countryData.countries)
+                                    Spacer()
+                                }
+                                .frame(width: geometry.size.width)
+                                .transition(.opacity)
                             }
-                            .frame(width: geometry.size.width)
-                            .transition(.opacity)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 3.7)
                         }
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 3.7)
                     }
-                }
-                .padding(.horizontal, 35)
-                Spacer().padding(.vertical, 30)
-                ZStack {
-                    Image("CountryBg")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    GeometryReader { geometry in
-                        Image("purple-pin")
+                    .padding(.horizontal, 35)
+                    Spacer().padding(.vertical, 30)
+                    ZStack {
+                        Image("CountryBg")
                             .resizable()
-                            .offset(y: 6)
-                            .offset(x: 0)
-                            .frame(minWidth: 0, maxWidth: 35, minHeight: 0, maxHeight: 50)
-                            .rotationEffect(.degrees(-38))
-                    }
-                    
-                    VStack(spacing: 10) {
-                        Image("SAFLAG")
-                            .resizable()
-                            .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
-                            .frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200)
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
                         
-                        Text("Country name")
-                            .font(.system(size: 24, weight: .bold, design: .monospaced))
+                        GeometryReader { geometry in
+                            Image("purple-pin")
+                                .resizable()
+                                .offset(y: 6)
+                                .offset(x: 0)
+                                .frame(minWidth: 0, maxWidth: 35, minHeight: 0, maxHeight: 50)
+                                .rotationEffect(.degrees(-38))
+                        }
+                        
+                        VStack(spacing: 10) {
+                            Image("SAFLAG")
+                                .resizable()
+                                .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
+                                .frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200)
+                            
+                            Text("Country name")
+                                .font(.system(size: 24, weight: .bold, design: .monospaced))
+                        }
+                        .zIndex(1)
                     }
-                    .zIndex(1)
+                    .padding(.horizontal, isSearching ? 35 : 15)
+                    .zIndex(0)
                 }
-                .padding(.horizontal, isSearching ? 35 : 15)
-                .zIndex(0)
+            }
+            .onAppear() {
+                self.countryData.fetchData()
             }
         }
-        .onAppear() {
-            self.countryData.fetchData()
-        }
-       
     }
 }
     //    private func addItem() {

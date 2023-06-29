@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct CountryDetailView: View {
+    
     @Environment(\.dismiss) private var dismiss
     
+    @Binding var countryData: Country
+        
     var body: some View {
         NavigationView {
             VStack() {
                 HStack( spacing: 25 ) {
                     Image("purple-pin")
                     
-                    Text("Columbia").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
+                    Text(countryData.name?.common ?? "").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
                 }
                 .padding([.bottom], 30)
                 
@@ -83,14 +86,18 @@ struct CountryDetailView: View {
             .frame(maxWidth: .infinity)
             .padding([.top], 40)
 //            .navigationBarTitle(appLogo, displayMode: .inline)
-            .navigationBarItems(leading: backButton, trailing: appLogo)
+//            .navigationBarItems(leading: backButton, trailing: appLogo)
             .navigationBarBackButtonHidden()
+            
+        }.onAppear() {
+            print(countryData.name?.common ?? "")
         }
     }
     
     var backButton: some View {
         Button(action: {
             dismiss()
+            print("lol")
         }) {
             Image(systemName: "chevron.left")
                 .imageScale(.large)
@@ -109,8 +116,8 @@ struct CountryDetailView: View {
     }
 }
 
-struct CountryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        CountryDetailView()
-    }
-}
+//struct CountryDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CountryDetailView(data: .constant([Country]))
+//    }
+//}

@@ -12,6 +12,7 @@ struct SearchInput: View {
     @State var searchText = ""
     @Binding var text : String
     @Binding var isSearching: Bool
+    @Binding var Data: [Country]
     
     var body: some View {
         HStack{
@@ -24,9 +25,9 @@ struct SearchInput: View {
             .onTapGesture {
                         isSearching = true
                     }
-                    .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-                        isSearching = false
-                    }
+//                    .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+//                        isSearching = false
+//                    }
             .frame(height: 48)
             .padding(.horizontal, 15)
             
@@ -42,7 +43,7 @@ struct SearchInput: View {
 
 struct SearchInput_Previews: PreviewProvider {
     static var previews: some View {
-        SearchInput(text: .constant(""), isSearching: .constant(false))
+        SearchInput(text: .constant(""), isSearching: .constant(false), Data: .constant([]))
     }
 }
 
