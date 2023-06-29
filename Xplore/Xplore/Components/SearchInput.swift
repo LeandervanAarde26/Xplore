@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct SearchInput: View {
+    
     let names = ["Vian", "leander", "Reinhard", "Wiaan", "Reenen", "Bronwyn", "Sibu"]
+    
     @State var searchText = ""
-@Binding var text : String
+    @Binding var text : String
     @Binding var isSearching: Bool
+    
     var body: some View {
         HStack{
             Image(systemName: "magnifyingglass")
@@ -21,11 +24,11 @@ struct SearchInput: View {
                 text: $text
             )
             .onTapGesture {
-                                isSearching = true
-                            }
-                            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-                                isSearching = false
-                            }
+                        isSearching = true
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+                        isSearching = false
+                    }
             .frame(height: 48)
             .padding(.horizontal, 15)
             
@@ -41,7 +44,7 @@ struct SearchInput: View {
 
 struct SearchInput_Previews: PreviewProvider {
     static var previews: some View {
-        SearchInput(text: .constant(""),isSearching: .constant(false))
+        SearchInput(text: .constant(""), isSearching: .constant(false))
     }
 }
 

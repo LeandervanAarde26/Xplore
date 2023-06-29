@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var isSearching = false
     @ObservedObject private var countryData = countryViewModel()
     
+    @State var searchTerm: String = ""
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -24,14 +26,14 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                         .font(.system(size: 28, weight: .bold, design: .monospaced))
                     
-                    SearchInput(text: .constant(""), isSearching: $isSearching)
+                    SearchInput(text: $searchTerm, isSearching: $isSearching)
                         
                     
                     if isSearching {
                         GeometryReader { geometry in
                             HStack {
                                 Spacer()
-                                SearchDropdown()
+                                SearchDropdown(searchTerm: $searchTerm)
                                 Spacer()
                             }
                             .frame(width: geometry.size.width)

@@ -8,35 +8,40 @@
 import SwiftUI
 
 struct SearchDropdown: View {
-    struct Person: Identifiable {
-            let id: UUID
-            let name: String
-        }
-    let names: [Person] = [
-            Person(id: UUID(), name: "John"),
-            Person(id: UUID(), name: "Jane"),
-            Person(id: UUID(), name: "Alice"),
-            Person(id: UUID(), name: "Vian"),
-            Person(id: UUID(), name: "Reinhardt"),
-            Person(id: UUID(), name: "Leander")
-        ]
+    
+    @ObservedObject private var countryData = countryViewModel()
+    
+    @Binding var searchTerm: String
     
     var body: some View {
         VStack(){
-            List(names) { name in
+            Text(searchTerm)
+            List(countryData.countries) { country in
                 HStack {
-                    Image("SAFLAG")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(
-                            minWidth: 0,
-                            maxWidth: 40,
-                            minHeight: 0,
-                            maxHeight: 70
-                        )
-                        .frame(width: 40, height: 40) // Adjust the width and height of the image as needed
+                    AsyncImage(url: URL(string: country.flags?.png ?? "SAFLAG")) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(
+                                minWidth: 0,
+                                maxWidth: 40,
+                                minHeight: 0,
+                                maxHeight: 70
+                            )
+                            .frame(width: 40, height: 40) // Adjust the width and height of the image as needed/
+                    } placeholder: {
+                        Image("SAFLAG")
+                            .aspectRatio(contentMode: .fit)
+                            .frame(
+                                minWidth: 0,
+                                maxWidth: 40,
+                                minHeight: 0,
+                                maxHeight: 70
+                            )
+                            .frame(width: 40, height: 40)
+                    }.frame(width: 40, height: 40)
+                    
                     Spacer()
-                    Text(name.name)
+                    Text(country.name?.common ?? "Country Name")
                     Spacer()
                 }
             }
@@ -49,11 +54,14 @@ struct SearchDropdown: View {
         maxWidth: .infinity,
         minHeight: 20,
         maxHeight: 500)
+        .onAppear(){
+            self.countryData.fetchData()
+        }
     }
 }
 
 struct SearchDropdown_Previews: PreviewProvider {
     static var previews: some View {
-        SearchDropdown()
+        SearchDropdown(searchTerm: .constant(""))
     }
 }
