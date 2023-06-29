@@ -39,11 +39,6 @@ struct MainNavigation: View {
                 .tabItem{
                     Label("Feed", systemImage: "note.text")
                 }
-                
-                LoginView()
-                    .tabItem{
-                        Label("Test", systemImage: "heart")
-                    }
             }
         } else {
             LoginView()
