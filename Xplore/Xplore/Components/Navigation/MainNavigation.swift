@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MainNavigation: View {
     var body: some View {
@@ -13,6 +14,9 @@ struct MainNavigation: View {
             ContentView()
             .tabItem{
                 Label("Home", systemImage: "house")
+            }
+            .onAppear() {
+                
             }
             
 //            Text("Countries")
@@ -30,6 +34,11 @@ struct MainNavigation: View {
             .tabItem{
                 Label("Feed", systemImage: "note.text")
             }
+            
+            TestView()
+                .tabItem{
+                    Label("Test", systemImage: "heart")
+                }
         }
     }
 }

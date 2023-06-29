@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @State private var isSearching = false
+    @ObservedObject private var countryData = countryViewModel()
     
     var body: some View {
         ScrollView {
@@ -70,6 +71,9 @@ struct ContentView: View {
                 .padding(.horizontal, isSearching ? 35 : 15)
                 .zIndex(0)
             }
+        }
+        .onAppear() {
+            self.countryData.fetchData()
         }
        
     }
