@@ -82,7 +82,9 @@ struct AddPostView: View {
                 .frame(
                     maxWidth: .infinity)
                 .tint(Color(red: 0.48, green: 0.53, blue: 0.95))
-                Button(action: {viewModel.uploadImage(fromURL: selectedImageURL)}) {
+                Button(action: {
+                    
+                    viewModel.uploadImage(fromURL: selectedImageURL)}) {
                     Text("Add post")
                 }
                 .buttonStyle(.borderedProminent)
