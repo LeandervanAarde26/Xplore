@@ -12,7 +12,8 @@ struct AddPostView: View {
     @State var selectedCountry = "South Afica"
     @State private var description = ""
     @State private var selectedImageURL: URL? = nil
- 
+    @StateObject private var viewModel=ImageUploadViewModel(storageManager: storageManager())
+
     
     
     var body: some View {
@@ -81,8 +82,7 @@ struct AddPostView: View {
                 .frame(
                     maxWidth: .infinity)
                 .tint(Color(red: 0.48, green: 0.53, blue: 0.95))
-                
-                Button(action: {print("Button pressed")}){
+                Button(action: {viewModel.uploadImage(fromURL: selectedImageURL)}) {
                     Text("Add post")
                 }
                 .buttonStyle(.borderedProminent)

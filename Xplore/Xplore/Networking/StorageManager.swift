@@ -13,21 +13,26 @@ import UIKit
 class storageManager: ObservableObject{
     let storage = Storage.storage()
     let timestamp = Date().timeIntervalSince1970
-    
-    public func uploadImage(image: UIImage){
+
+    public func uploadImage(image: UIImage, completion: @escaping (URL?, Error?) -> Void){
         let storageRef = storage.reference().child("images/image_\(timestamp).jpg")
         let imageData = image.jpegData(compressionQuality: 0.8)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         if let data = imageData {
                 storageRef.putData(data, metadata: metadata) { (metadata, error) in
+                    storageRef.downloadURL { (url, error) in
                         if let error = error {
-                                print("Error while uploading file: ", error)
+                            print("Error retrieving download URL: ", error)
+                            completion(nil, error)
+                            return
                         }
 
-                        if let metadata = metadata {
-                                print("Metadata: ", metadata)
+                        if let downloadURL = url {
+                            print("Download URL: ", downloadURL)
+                            completion(downloadURL, nil)
                         }
+                    }
                 }
         }
     }

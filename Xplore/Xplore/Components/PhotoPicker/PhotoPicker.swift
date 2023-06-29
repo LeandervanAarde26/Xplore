@@ -5,6 +5,7 @@ struct PhotoPicker: View {
     @Binding var imageUrl: URL?
     @StateObject private var imghelper = imageHelper()
     @StateObject private var firebaseStoage = storageManager()
+    @State private var imgUri: URL?
         var body: some View {
             VStack {
                 AvatarImageView(image: model.avatarImage)
@@ -18,7 +19,6 @@ struct PhotoPicker: View {
                             model.avatarImage = Image(uiImage: uiImage)
                             if let imageURL = await imghelper.saveImageToTemporaryDirectory(image: uiImage) {
                                 imageUrl = imageURL
-                                firebaseStoage.uploadImage(image: uiImage)
                             }
                             return
                         }
