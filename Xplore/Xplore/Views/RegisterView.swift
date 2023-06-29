@@ -13,6 +13,7 @@ struct RegisterView: View {
     
     @StateObject private var regModel = InputRegData()
     @StateObject private var errModel = InputErrors()
+    @State private var selectedImageURL: URL? = nil
     
     func Register() {
         //Model usage example code
@@ -53,7 +54,7 @@ struct RegisterView: View {
                 Spacer()
                 
                 VStack(spacing: 20){
-                    PhotoPicker().frame(height: 320)
+                    PhotoPicker(imageUrl: $selectedImageURL)
                     TextFieldComp(textInput: $regModel.Username,
                                   failed: $errModel.errIcon,
                                   placeholder: .constant("username"),
