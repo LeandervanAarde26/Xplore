@@ -56,7 +56,7 @@ struct SearchDropdown: View {
                     }
                 )
             }.listStyle(PlainListStyle()) // Optional:
-            .background(Color.clear)s
+            .background(Color.clear)
         }
     }
 }
