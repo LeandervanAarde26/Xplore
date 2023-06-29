@@ -36,7 +36,7 @@ struct MainNavigation: View {
                 Label("Feed", systemImage: "note.text")
             }
             
-            TestView()
+            LoginView()
                 .tabItem{
                     Label("Test", systemImage: "heart")
                 }
