@@ -30,13 +30,13 @@ struct CountryDetailView: View {
                             .frame(height: 0.5)
                             .background(Color("AppGray"))
                         
-                        KeyValueView(key: "Capital", value: countryData.capital?.joined(separator: ", ") ?? "N/A")
+                        KeyValueView(key: .constant("Capital"), value: .constant(countryData.capital?.joined(separator: ", ") ?? "N/A"))
                         
                         Divider()
                             .frame(height: 0.5)
                             .background(Color("AppGray"))
                         
-                        KeyValueView(key: "Population", value: "\(countryData.population ?? 0)")
+                        KeyValueView(key: .constant("Population"), value: .constant("\(countryData.population ?? 0)"))
                         
                         Divider()
                             .frame(height: 0.5)
@@ -48,13 +48,12 @@ struct CountryDetailView: View {
                             .frame(height: 0.5)
                             .background(Color("AppGray"))
                         
-                        KeyValueView(key: "Timezone", value: countryData.timezones?.joined(separator: ", ") ?? "N/A")
+                        KeyValueView(key: .constant("Timezone"), value: .constant(countryData.timezones?.joined(separator: ", ") ?? "N/A"))
                         
                         Divider()
                             .frame(height: 0.5)
                             .background(Color("AppGray"))
                         
-                        KeyValueView(key: "Continent", value: countryData.continents?.joined(separator: ", ") ?? "N/A")
                     }
                     .padding()
                 }
@@ -89,8 +88,8 @@ struct HeaderView: View {
 }
 
 struct KeyValueView: View {
-    var key: String
-    var value: String
+    @Binding var key: String
+    @Binding var value: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -107,16 +106,22 @@ struct CurrencyView: View {
     var currencies: Currency?
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .leading) {
             Text("Currency")
                 .font(.title2)
             
-            Group {
+            HStack {
                 Text(currencies?.name ?? "N/A")
-                    .font(.body)
+                    .font(.body).frame(maxWidth: .infinity, alignment: .center)
+                Text(currencies?.symbol ?? "N/A")
+                    .font(.body).frame(maxWidth: .infinity, alignment: .center)
+                Text(currencies?.acronym ?? "N/A")
+                    .font(.body).frame(maxWidth: .infinity, alignment: .center)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
+}
 //
 //struct CountryDetailView_Previews: PreviewProvider {
 //    @Binding var countryData: Country
