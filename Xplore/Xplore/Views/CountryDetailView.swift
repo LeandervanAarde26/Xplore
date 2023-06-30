@@ -107,7 +107,7 @@ struct CurrencyView: View {
     var currencies: Currency?
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             Text("Currency")
                 .font(.title2)
             
