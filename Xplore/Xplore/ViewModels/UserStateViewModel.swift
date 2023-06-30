@@ -11,7 +11,7 @@ import Firebase
 
 
 class UserStateViewModel: ObservableObject {
-    @Published var isLoggedIn: Bool = false
+    @Published var isLoggedIn: Bool = true
     @Published var isBusy: Bool = false
     
     func Login(email: String, password: String) {

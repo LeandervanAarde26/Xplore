@@ -8,116 +8,120 @@
 import SwiftUI
 
 struct CountryDetailView: View {
-    
-    @Environment(\.dismiss) private var dismiss
-    
+        
     @Binding var countryData: Country
+    var tempArrray = ["hey"]
+
         
     var body: some View {
         NavigationView {
             VStack() {
-                HStack( spacing: 25 ) {
-                    Image("purple-pin")
-                    
-                    Text(countryData.name?.common ?? "").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
-                }
-                .padding([.bottom], 30)
+            AsyncImage(url: URL(string: countryData.flags?.png ?? "SAFLAG")) { image in
+                image.resizable()
+                    .scaledToFit()
+                    .shadow(radius: 10)// Adjust the width and height of the image as needed/
+            } placeholder: {
+
+            }
                 
-                VStack() {
-                    Image(systemName: "heart")
-                        .foregroundColor(.red)
-                        .imageScale(.large)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding([.bottom], 5)
+                ScrollView{
+                    HStack() {
+                        Image("purple-pin")
                         
+                        Text(countryData.name?.common ?? "").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
+                            .frame(maxWidth: .infinity)
+                        
+                        Image(systemName: "heart")
+                            .foregroundColor(.red)
+                            .imageScale(.large)
+                    }
+                    .padding()
                     
-                    Image("SAFLAG")
-                        .resizable()
-                        .scaledToFit()
-                }
-                .padding([.leading, .trailing], 60)
-                
-                VStack() {
                     VStack(alignment: .leading) {
-                        Text("Label")
-                            .font(.system(size: 20))
+                        Text("Capital")
+                        .font(.title2)
+                        ForEach(countryData.capital ?? ["Ljubljana"], id:\.self) {
+                            capital in
+                            Text(capital)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("Description")
+                    Divider()
+                    .frame(height: 0.5)
+                    .background(Color("AppGray"))
+                
+                    VStack(alignment: .leading) {
+                        Text("Population")
+                            .font(.title2)
+                        
+                        Text(String(countryData.population ?? 0))
                             .font(.system(size: 15))
                     }
-    //                    .foregroundColor(.red)
                     .frame(maxWidth: .infinity, alignment: .leading)
-
+                        
+                    Divider()
+                        .frame(height: 0.5)
+                     .background(Color("AppGray"))
+                        
+                    VStack(alignment: .leading) {
+                        Text("Currency")
+                            .font(.title2)
+                            Text(countryData.currencies?.name ?? "")
+                                .font(.body).frame(maxWidth: .infinity)
+                        HStack{
+                            Text(countryData.currencies?.symbol ?? "")
+                                .font(.body).frame(maxWidth: .infinity)
+                            Text(countryData.currencies?.acronym ?? "")
+                                .font(.body).frame(maxWidth: .infinity)
+                        }
+                        
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                     
                     Divider()
                         .frame(height: 0.5)
                      .background(Color("AppGray"))
                     
                     VStack(alignment: .leading) {
-                        Text("Label 2")
-                            .font(.system(size: 20))
-                        
-                        Text("Description")
-                            .font(.system(size: 15))
-                    }
-    //                    .foregroundColor(.red)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
+                        Text("Timezone")
+                        .font(.title2)
+                        ForEach(countryData.timezones ?? ["Ljubljana"], id:\.self) {
+                            capital in
+                            Text(capital)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                     
                     Divider()
                         .frame(height: 0.5)
                      .background(Color("AppGray"))
                     
                     VStack(alignment: .leading) {
-                        Text("Label 3")
-                            .font(.system(size: 20))
-                        
-                        Text("Description")
-                            .font(.system(size: 15))
-                    }
-    
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding([.leading, .trailing], 35)
-                .padding([.top], 40)
+                        Text("Continent")
+                        .font(.title2)
+                        ForEach(countryData.continents ?? ["Ljubljana"], id:\.self) {
+                            capital in
+                            Text(capital)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+
+                }.padding()
                 
                 Spacer()
+                
             }
             .frame(maxWidth: .infinity)
-            .padding([.top], 40)
-//            .navigationBarTitle(appLogo, displayMode: .inline)
-//            .navigationBarItems(leading: backButton, trailing: appLogo)
+            .padding([.top], 5)
             .navigationBarBackButtonHidden()
             
-        }.onAppear() {
-            print(countryData.name?.common ?? "")
-        }
-    }
-    
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-            print("lol")
-        }) {
-            Image(systemName: "chevron.left")
-                .imageScale(.large)
-        }
-    }
-    
-    var appLogo: some View {
-        HStack() {
-            Spacer()
-            Image("Icon")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 40)
-            Spacer()
+            }.onAppear() {
+            print(countryData.continents ?? "")
         }
     }
 }
-
+//
 //struct CountryDetailView_Previews: PreviewProvider {
+//    @Binding var countryData: Country
 //    static var previews: some View {
-//        CountryDetailView(data: .constant([Country]))
+//
+//        CountryDetailView(data: .constant(countryData))
 //    }
 //}
