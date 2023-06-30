@@ -13,7 +13,7 @@ struct MainNavigation: View {
     
 
     var body: some View {
-        if ( Auth.auth().currentUser?.uid != nil ) {
+//        if ( Auth.auth().currentUser?.uid != nil ) {
             TabView{
                 ContentView()
                 .tabItem{
@@ -40,9 +40,9 @@ struct MainNavigation: View {
                     Label("Feed", systemImage: "note.text")
                 }
             }
-        } else {
-            LoginView()
-        }
+//        } else {
+//            LoginView()
+//        }
     }
 }
 

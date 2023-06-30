@@ -12,16 +12,11 @@ struct LoginView: View {
     
     @StateObject private var logModel = InputLogData()
     @StateObject private var errModel = InputErrors()
+    @EnvironmentObject var userVM: UserStateViewModel
     
     func Login() {
         
-        Auth.auth().signIn(withEmail: logModel.Email, password: logModel.Password) { (res, err ) in
-            if err != nil {
-                print(err?.localizedDescription ?? "")
-            } else {
-                print("You have successfully logged in")
-            }
-        }
+        userVM.Login(email: logModel.Email, password: logModel.Password)
 //        //Model usage example code
 //        if !logModel.Email.isEmpty {
 //            //Value from email input
