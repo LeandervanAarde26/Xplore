@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LoginView: View {
     
@@ -13,18 +14,26 @@ struct LoginView: View {
     @StateObject private var errModel = InputErrors()
     
     func Login() {
-        //Model usage example code
-        if !logModel.Email.isEmpty {
-            //Value from email input
-            print(logModel.Email)
-            
-        } else {
-            //sets page error
-            //Check InputModels model for other available errors
-            errModel.pageError = "Password or email is incorrect"
-            errModel.emailError = "Email is empty"
-            
+        
+        Auth.auth().signIn(withEmail: logModel.Email, password: logModel.Password) { (res, err ) in
+            if err != nil {
+                print(err?.localizedDescription ?? "")
+            } else {
+                print("You have successfully logged in")
+            }
         }
+//        //Model usage example code
+//        if !logModel.Email.isEmpty {
+//            //Value from email input
+//            print(logModel.Email)
+//            
+//        } else {
+//            //sets page error
+//            //Check InputModels model for other available errors
+//            errModel.pageError = "Password or email is incorrect"
+//            errModel.emailError = "Email is empty"
+//            
+//        }
     }
 
     var body: some View {
