@@ -11,7 +11,8 @@ struct SearchDropdown: View {
     @Binding var searchTerm: String
     @Binding var Data: [Country]
     
-    var filteredCountries: [Country] {
+    lazy var filteredCountries: [Country] {
+        
             guard !searchTerm.isEmpty else {
                 return Data
             }

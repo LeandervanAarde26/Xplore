@@ -12,12 +12,28 @@ struct TextFieldComp: View {
     @Binding var failed: String
     @Binding var placeholder: String
     @Binding var errorMessage: String
+    @Binding var type: String
     
     var body: some View {
         VStack(){
             HStack(spacing: 20){
-                TextField(placeholder, text: $textInput)
-                    .background(.white)
+                
+            switch type {
+                case "email":
+                    TextField(placeholder, text: $textInput)
+                        .background(Color.white)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                case "pass":
+                    SecureField(placeholder, text: $textInput)
+                        .background(Color.white)
+                        .autocapitalization(.none)
+                default:
+                    TextField(placeholder, text: $textInput)
+                        .background(Color.white)
+                        .keyboardType(.default)
+                        .autocapitalization(.none)
+                }
                 
                 Image(systemName: !errorMessage.isEmpty ?
                       "xmark.circle.fill" : errorMessage.isEmpty ?
@@ -53,6 +69,7 @@ struct TextFieldComp_Previews: PreviewProvider {
         TextFieldComp(textInput: .constant(""),
                       failed: .constant("true"),
                       placeholder: .constant("placeholder"),
-                      errorMessage: .constant(""))
-    }
+                      errorMessage: .constant(""),
+                      type: .constant("pass"))
+        }
 }
