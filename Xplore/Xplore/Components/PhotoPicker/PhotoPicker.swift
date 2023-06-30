@@ -4,6 +4,8 @@ struct PhotoPicker: View {
     @State private var model = PhotoPickermodel()
     @Binding var imageUrl: URL?
     @StateObject private var imghelper = imageHelper()
+    @StateObject private var firebaseStoage = storageManager()
+    @State private var imgUri: URL?
         var body: some View {
             VStack {
                 AvatarImageView(image: model.avatarImage)

@@ -24,4 +24,8 @@ class imageHelper : ObservableObject {
             return nil
         }
     }
+    
+    
+
 }
+
