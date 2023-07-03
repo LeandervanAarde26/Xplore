@@ -26,39 +26,41 @@ struct SearchDropdown: View {
 
     
     var body: some View {
-        VStack{
-            List(filteredCountries) { country in
-                NavigationLink(
-                    /// 1
-                    destination: CountryDetailView(countryData: .constant(country)),
-                    /// 2
-                    label: {
-                        HStack {
-                                AsyncImage(url: URL(string: country.flags?.png ?? "SAFLAG")) { image in
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(
-                                            minWidth: 0,
-                                            maxWidth: 40,
-                                            minHeight: 0,
-                                            maxHeight: 70
-                                        )
-                                        .frame(width: 40, height: 40) // Adjust the width and height of the image as needed/
-                                } placeholder: {
+        ScrollView {
+            LazyVStack {
+                ForEach(filteredCountries) { country in
+                        NavigationLink(
+                            /// 1
+                            destination: CountryDetailView(countryData: .constant(country)),
+                            /// 2
+                            label: {
+                                HStack {
+                                        AsyncImage(url: URL(string: country.flags?.png ?? "SAFLAG")) { image in
+                                            image.resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(
+                                                    minWidth: 0,
+                                                    maxWidth: 40,
+                                                    minHeight: 0,
+                                                    maxHeight: 70
+                                                )
+                                                .frame(width: 40, height: 40) // Adjust the width and height of the image as needed/
+                                        } placeholder: {
 
-                                }.frame(width: 40, height: 40)
-                                
-                                Spacer()
-                                
-                                Text(country.name?.common ?? "Country Name")
-                                
-                                Spacer()
+                                        }.frame(width: 40, height: 40)
+
+                                        Spacer()
+
+                                        Text(country.name?.common ?? "Country Name")
+
+                                        Spacer()
+                                    }
                             }
+                        )
                     }
-                )
-            }.listStyle(PlainListStyle()) // Optional:
-            .background(Color.clear)
+            }
         }
+        .frame(maxHeight: 250)
     }
 }
 
