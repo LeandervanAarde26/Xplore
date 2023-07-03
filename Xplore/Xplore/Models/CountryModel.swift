@@ -9,7 +9,6 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Country: Identifiable, Codable {
-    
     @DocumentID var id: String?
     var name: Name?
     var currencies: Currency?

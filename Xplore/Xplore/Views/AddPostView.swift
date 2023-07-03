@@ -12,8 +12,11 @@ struct AddPostView: View {
   @State var selectedCountry = "South Afica"
   @State private var description = ""
   @State private var selectedImageURL: URL? = nil
-  @StateObject private var viewModel = ImageUploadViewModel(storageManager: storageManager())
+  @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
   @State private var firebaseViewModel = PostViewModel()
+@ObservedObject private var countryData = countryViewModel()
+    @ObservedObject private var userVm = UserStateViewModel()
+    
 
   var body: some View {
     ScrollView {
@@ -58,26 +61,23 @@ struct AddPostView: View {
             .colorMultiply(Color(.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 12))
 
-          Picker("Country: ", selection: $selectedCountry) {
-            ForEach(plaecholderCountries, id: \.self) { Country in
-              Text(Country.capitalized)
+            Picker("Country: ", selection: $selectedCountry) {
+                ForEach(countryData.countries.sorted { $0.name?.common ?? "" < $1.name?.common ?? "" })  { country in
+                    Text(country.name?.common ?? " ")
+                }
             }
-          }
-          .frame(minHeight: 0, maxHeight: 115)
-          .pickerStyle(.wheel)
+            .frame(minHeight: 0, maxHeight: 115)
+            .pickerStyle(.wheel)
         }
         .padding(.horizontal, 20)
         Spacer()
         HStack {
 
           Button(action: {
-            if let imageURL = selectedImageURL {
-              print("Selected Image URL:", imageURL)
-            } else {
-              print("No image selected.")
-            }
+              selectedImageURL = nil
+              description = ""
           }) {
-            Text("Log Image URL")
+            Text("Cancel")
           }
           .buttonStyle(.borderless)
           .frame(
@@ -88,8 +88,8 @@ struct AddPostView: View {
                 Task{
             
                     try await firebaseViewModel.addUserPost(
-                        userId: "121212", postImage: selectedImageURL,
-                        postDescription: "So much fun here in SA!", postCountry: "South Africa"
+                        userId: userVm.getUserId(), postImage: selectedImageURL,
+                        postDescription: description, postCountry: selectedCountry
                     )
                 }
             }) {
@@ -106,6 +106,9 @@ struct AddPostView: View {
     .onTapGesture {
         self.hideKeyboard()
       }
+    .onAppear() {
+        self.countryData.fetchData()
+    }
     }
   }
 }

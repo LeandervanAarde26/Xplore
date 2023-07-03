@@ -10,7 +10,7 @@ import Firebase
 import FirebaseStorage
 import UIKit
 
-class storageManager: ObservableObject{
+class StorageManager: ObservableObject{
     let storage = Storage.storage()
     let timestamp = Date().timeIntervalSince1970
 

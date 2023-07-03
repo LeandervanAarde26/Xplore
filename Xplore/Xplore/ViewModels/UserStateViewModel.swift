@@ -20,6 +20,10 @@ class UserStateViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
+    func getUserId() -> String {
+        return Auth.auth().currentUser?.uid ?? "No user id found"
+    }
+    
     func checkAuth() {
         if Auth.auth().currentUser?.uid != nil {
             isLoggedIn = true
