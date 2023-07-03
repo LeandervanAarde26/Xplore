@@ -70,6 +70,11 @@ struct CountryDetailView: View {
 struct HeaderView: View {
     var countryData: Country
     
+    @ObservedObject private var favouritesViewModel = FavouritesViewModel()
+    @ObservedObject private var userState = UserStateViewModel()
+    
+    var userId = UserStateViewModel().getUserId()
+    
     var body: some View {
         HStack {
             Image("purple-pin")
@@ -79,9 +84,13 @@ struct HeaderView: View {
                 .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
                 .frame(maxWidth: .infinity)
             
-            Image(systemName: "heart")
-                .foregroundColor(.red)
-                .imageScale(.large)
+            Button(){
+                favouritesViewModel.FavouriteCountry(uid: userId, countryId: countryData.id ?? "none")
+            } label: {
+                Image(systemName: "heart")
+                    .foregroundColor(.red)
+                    .imageScale(.large)
+            }
         }
         .padding()
     }

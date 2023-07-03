@@ -10,6 +10,8 @@
 		6E5583332A45847400FCDBD4 /* XploreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5583322A45847400FCDBD4 /* XploreTests.swift */; };
 		6E55833D2A45847400FCDBD4 /* XploreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55833C2A45847400FCDBD4 /* XploreUITests.swift */; };
 		6E55833F2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55833E2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift */; };
+		80733A1A2A52B33400654983 /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80733A192A52B33400654983 /* FavouritesViewModel.swift */; };
+		80733A1C2A52B8DA00654983 /* FavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80733A1B2A52B8DA00654983 /* FavouriteModel.swift */; };
 		D63FCF8F2A4EC8D900D394B4 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63FCF602A4EC8D900D394B4 /* PostViewModel.swift */; };
 		D63FCF902A4EC8D900D394B4 /* ImageUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63FCF612A4EC8D900D394B4 /* ImageUploadViewModel.swift */; };
 		D63FCF912A4EC8D900D394B4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63FCF622A4EC8D900D394B4 /* Persistence.swift */; };
@@ -86,6 +88,8 @@
 		6E5583382A45847400FCDBD4 /* XploreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XploreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E55833C2A45847400FCDBD4 /* XploreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XploreUITests.swift; sourceTree = "<group>"; };
 		6E55833E2A45847400FCDBD4 /* XploreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XploreUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		80733A192A52B33400654983 /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
+		80733A1B2A52B8DA00654983 /* FavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteModel.swift; sourceTree = "<group>"; };
 		D63FCF602A4EC8D900D394B4 /* PostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		D63FCF612A4EC8D900D394B4 /* ImageUploadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUploadViewModel.swift; sourceTree = "<group>"; };
 		D63FCF622A4EC8D900D394B4 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				D63FCF602A4EC8D900D394B4 /* PostViewModel.swift */,
 				D63FCF612A4EC8D900D394B4 /* ImageUploadViewModel.swift */,
 				D63FCFB62A4EC92000D394B4 /* UserStateViewModel.swift */,
+				80733A192A52B33400654983 /* FavouritesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				D63FCF6F2A4EC8D900D394B4 /* SearchCountryModel.swift */,
 				D63FCF702A4EC8D900D394B4 /* UserModel.swift */,
 				D63FCF712A4EC8D900D394B4 /* AddPost.swift */,
+				80733A1B2A52B8DA00654983 /* FavouriteModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -484,12 +490,14 @@
 				D63FCFA22A4EC8D900D394B4 /* PhotoPicker.swift in Sources */,
 				D63FCF902A4EC8D900D394B4 /* ImageUploadViewModel.swift in Sources */,
 				D63FCFA12A4EC8D900D394B4 /* AvatarImageView.swift in Sources */,
+				80733A1C2A52B8DA00654983 /* FavouriteModel.swift in Sources */,
 				D63FCFB22A4EC8D900D394B4 /* SplashView.swift in Sources */,
 				D63FCFA42A4EC8D900D394B4 /* SearchInput.swift in Sources */,
 				D63FCFB32A4EC8D900D394B4 /* RegisterView.swift in Sources */,
 				D63FCF922A4EC8D900D394B4 /* StorageManager.swift in Sources */,
 				D63FCFA72A4EC8D900D394B4 /* FeedComp.swift in Sources */,
 				D63FCFA82A4EC8D900D394B4 /* MainNavigation.swift in Sources */,
+				80733A1A2A52B33400654983 /* FavouritesViewModel.swift in Sources */,
 				D63FCFB02A4EC8D900D394B4 /* AddPostView.swift in Sources */,
 				D63FCFA52A4EC8D900D394B4 /* SearchDropdown.swift in Sources */,
 				D63FCFA62A4EC8D900D394B4 /* TopMap.swift in Sources */,
