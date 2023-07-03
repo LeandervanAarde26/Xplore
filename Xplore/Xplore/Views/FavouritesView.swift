@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct FavouritesView: View {
-    @ObservedObject private var userVM = UserStateViewModel()
+    @EnvironmentObject var userVM: UserStateViewModel
+    
+    func signOut() async {
+        await userVM.signOutUser()
+    }
+    
     var body: some View {
         VStack(){
             HStack(alignment: VerticalAlignment.center){
@@ -57,7 +62,7 @@ struct FavouritesView: View {
                 Button(){
                     // Add Task
                     Task {
-                        await userVM.signOutUser()
+                        await signOut()
                     }
                 } label: {
                     Text("Logout")

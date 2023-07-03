@@ -20,11 +20,12 @@ class UserStateViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    func signOutUser() {
+    func signOutUser() async {
         do {
-            try Auth.auth().signOut()
-            isLoggedIn = false
+            let signOutResult = try await Auth.auth().signOut()
+            
             DispatchQueue.main.async {
+                print("Logged out")
                 self.isBusy = false
                 self.isLoggedIn = false
                 self.isLoginView = true
