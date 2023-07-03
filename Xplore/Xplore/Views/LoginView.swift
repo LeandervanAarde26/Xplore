@@ -103,16 +103,18 @@ struct LoginView: View {
                             await Login()
                         }
                     } label: {
-                        Text("Login").bold()
+                        Text("Login")
+                            .bold()
+                            .foregroundStyle(.white)
+                            .frame(width: 250, alignment: .center)
+                            .padding(.horizontal, 35)
+                            .padding(.vertical, 14)
+                            .background(Color(red: 0.48, green: 0.53, blue: 0.95))
+                            .cornerRadius(10)
+                            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
+                            .padding()
                     }
-                    .foregroundStyle(.white)
-                    .frame(width: 250, alignment: .center)
-                    .padding(.horizontal, 35)
-                    .padding(.vertical, 14)
-                    .background(Color(red: 0.48, green: 0.53, blue: 0.95))
-                    .cornerRadius(10)
-                    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
-                    .padding()
+
                     
                     Button() {
                         userVM.isLoginView = false
