@@ -18,21 +18,26 @@ class FavouritesViewModel: ObservableObject {
     
     func FavouriteCountry(uid: String, countryId: String) {
         
-        let fav = FavouriteModel(userId: uid)
+        let docRef = db.collection("countries").document(countryId)
         
-        do {
-            
-        try db.collection("countries").document(countryId).setData(["favourited": [uid]], merge: true)
-            
-            print(countryId)
-            
-        }
+        let newValue = uid
+        docRef.updateData(["favourited": FieldValue.arrayUnion([newValue])])
         
-        catch {
-            
-            print(error)
-            
-        }
+//        let fav = FavouriteModel(userId: uid)
+        
+//        do {
+//
+//        try db.collection("countries").document(countryId).setData(["favourited": [uid]], merge: true)
+//
+//            print(countryId)
+//
+//        }
+//
+//        catch {
+//
+//            print(error)
+//
+//        }
         
 //        docRef.setData(fav) { error in
 //            if let error = error {
