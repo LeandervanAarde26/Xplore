@@ -18,11 +18,11 @@ class FavouritesViewModel: ObservableObject {
     
     func FavouriteCountry(uid: String, countryId: String) {
         
-//        let fav = FavouriteModel(userId: uid)
+        let fav = FavouriteModel(userId: uid)
         
         do {
             
-        try db.collection("countries").document(countryId).setData(["favourited": uid], merge: true)
+        try db.collection("countries").document(countryId).setData(["favourited": [uid]], merge: true)
             
             print(countryId)
             
