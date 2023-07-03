@@ -1,16 +1,12 @@
-//
 //  UserStateViewModel.swift
 //  Xplore
 //
 //  Created by Vian du Plessis on 2023/06/30.
-//
 
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 import FirebaseFirestore
-
-
 
 class UserStateViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = true

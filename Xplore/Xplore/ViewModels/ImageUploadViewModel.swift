@@ -38,7 +38,6 @@ class ImageUploadViewModel: ObservableObject {
             if let uri = uri {
                 DispatchQueue.main.async {
                     self?.imgUri = uri
-                    print("Uploaded image URI:", uri)
                     completion(uri, nil)
                 }
             }

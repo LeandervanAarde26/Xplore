@@ -14,8 +14,8 @@ struct AddPostView: View {
   @State private var selectedImageURL: URL? = nil
   @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
   @State private var firebaseViewModel = PostViewModel()
-@ObservedObject private var countryData = countryViewModel()
-    @ObservedObject private var userVm = UserStateViewModel()
+  @ObservedObject private var countryData = countryViewModel()
+  @ObservedObject private var userVm = UserStateViewModel()
     
 
   var body: some View {
@@ -86,7 +86,6 @@ struct AddPostView: View {
           .tint(Color(red: 0.48, green: 0.53, blue: 0.95))
             Button(action:{
                 Task{
-            
                     try await firebaseViewModel.addUserPost(
                         userId: userVm.getUserId(), postImage: selectedImageURL,
                         postDescription: description, postCountry: selectedCountry

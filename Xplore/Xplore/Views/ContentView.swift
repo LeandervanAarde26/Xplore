@@ -10,9 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @State private var isSearching = false
-    
     @ObservedObject private var countryData = countryViewModel()
-    
     @State var searchTerm: String = ""
     
     var body: some View {
@@ -21,7 +19,6 @@ struct ContentView: View {
                 VStack(spacing: 0) {
                     TopMap()
                         .frame(height: 160)
-                    
                     VStack(alignment: .leading) {
                         Text("Discover")
                             .frame(maxWidth: .infinity)
@@ -29,8 +26,6 @@ struct ContentView: View {
                             .font(.system(size: 28, weight: .bold, design: .monospaced))
                         
                         SearchInput(text: $searchTerm, isSearching: $isSearching, Data: $countryData.countries)
-                            
-                        
                         if searchTerm.count > 0 {
                             GeometryReader { geometry in
                                 HStack {
@@ -51,7 +46,6 @@ struct ContentView: View {
                             .resizable()
                             .scaledToFill()
                             .edgesIgnoringSafeArea(.all)
-                        
                         GeometryReader { geometry in
                             Image("purple-pin")
                                 .resizable()
@@ -60,13 +54,11 @@ struct ContentView: View {
                                 .frame(minWidth: 0, maxWidth: 35, minHeight: 0, maxHeight: 50)
                                 .rotationEffect(.degrees(-38))
                         }
-                        
                         VStack(spacing: 10) {
                             Image("SAFLAG")
                                 .resizable()
                                 .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
                                 .frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200)
-                            
                             Text("Country name")
                                 .font(.system(size: 24, weight: .bold, design: .monospaced))
                         }
