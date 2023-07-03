@@ -21,6 +21,7 @@ struct Country: Identifiable, Codable {
     var timezones: [String]?
     var continents: [String]?
     var flags: Flag?
+    var favourited: [String]?
 }
 
 struct Name: Codable {
