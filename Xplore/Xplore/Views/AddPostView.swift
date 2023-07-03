@@ -17,7 +17,6 @@ struct AddPostView: View {
   @ObservedObject private var countryData = countryViewModel()
   @ObservedObject private var userVm = UserStateViewModel()
     
-
   var body: some View {
     ScrollView {
       VStack {

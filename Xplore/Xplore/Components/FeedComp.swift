@@ -13,7 +13,7 @@ struct FeedComp: View {
     @Binding var Username: String
     @Binding var UserImage: String
     @Binding var CountryName: String
-    
+    @Binding var CountryImage: String
     var body: some View {
         VStack(){
             HStack(spacing: 10){
@@ -30,10 +30,20 @@ struct FeedComp: View {
             }.frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 5)
             
-            Image("SAFLAG")
-                .resizable()
-                .frame(width: .infinity, height: 240)
-                .scaledToFit()
+//            AsyncImage(url: URL(string: randomCountry.flags?.png ?? "SAFLAG")) { image in
+//                image
+//                    .resizable()
+//                    .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
+//                    .frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200)
+            
+            AsyncImage(url: URL(string: CountryImage )) { image in
+                image
+                    .resizable()
+                    .frame(width: .infinity, height: 240)
+                    .scaledToFit()
+            } placeholder: {
+                //nil
+            }
             
             Text(Desc)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -51,8 +61,8 @@ struct FeedComp: View {
     }
 }
 
-struct FeedComp_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedComp(ContextualType: .constant(""), Desc: .constant("Description"), Username: .constant("Username"), UserImage: .constant(""), CountryName: .constant("Country Name"))
-    }
-}
+//struct FeedComp_Previews: PreviewProvider {
+////    static var previews: some View {
+////        FeedComp(ContextualType: .constant(""), Desc: .constant("Description"), Username: .constant("Username"), UserImage: .constant(""), CountryName: .constant("Country Name", ))
+////    }
+//}

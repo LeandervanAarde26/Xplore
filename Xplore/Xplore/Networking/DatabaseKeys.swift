@@ -10,5 +10,6 @@ import Foundation
 enum DatabaseKeys {
     enum Countries {
         static var collectionId = "countries"
+        static var postCollection = "Posts"
     }
 }

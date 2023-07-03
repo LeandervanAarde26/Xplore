@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FeedView: View {
+    @StateObject private var viewModel = PostViewModel()
+    
     var body: some View {
         VStack(){
             HStack(alignment: .center){
@@ -39,21 +41,33 @@ struct FeedView: View {
             
             Divider()
             
-            ScrollView(){
-                ForEach(0..<10) { index in
-                    FeedComp(
-                        ContextualType: .constant("Test \(index)"),
-                        Desc: .constant("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard."),
-                        Username: .constant("User Name"),
-                        UserImage: .constant(""),
-                        CountryName: .constant("Country name")
-                    )
+            ScrollView {
+                ForEach(viewModel.posts.indices, id: \.self) { index in
+                    let post = viewModel.posts[index]
+                    
+                    // Filter out empty posts
+                    if let description = post.description,
+                       let username = post.user?.username,
+                       let image = post.image,
+                       let country = post.country {
+                        FeedComp(
+                            ContextualType: .constant("Test \(index)"),
+                            Desc: .constant(description),
+                            Username: .constant(username),
+                            UserImage: .constant(image),
+                            CountryName: .constant(country),
+                            CountryImage: .constant(image)
+                        )
+                    }
                 }
+            }.onAppear{
+                self.viewModel.getAllPosts()
             }
             
             Spacer()
         }
     }
+    
 }
 
 struct FeedView_Previews: PreviewProvider {
