@@ -73,6 +73,8 @@ struct HeaderView: View {
     @ObservedObject private var favouritesViewModel = FavouritesViewModel()
     @ObservedObject private var userState = UserStateViewModel()
     
+    @State var favourited = false
+    
     var userId = UserStateViewModel().getUserId()
     
     var body: some View {
@@ -85,14 +87,30 @@ struct HeaderView: View {
                 .frame(maxWidth: .infinity)
             
             Button(){
-                favouritesViewModel.FavouriteCountry(uid: userId, countryId: countryData.id ?? "none")
+                print(countryData.favourited?.contains(userId) ??  false)
+                
+                if favourited {
+                    favouritesViewModel.delFavouriteCountry(uid: userId, countryId: countryData.id ?? "none")
+                    favourited = !favourited
+                } else {
+                    favouritesViewModel.FavouriteCountry(uid: userId, countryId: countryData.id ?? "none")
+                    favourited = !favourited
+                }
+                
             } label: {
-                Image(systemName: "heart")
+                Image(systemName: favourited ? "heart.fill" : "heart")
                     .foregroundColor(.red)
                     .imageScale(.large)
             }
+            .onAppear {
+                if favouritesViewModel.checkIfFavourited(uid: userId, countryId: countryData.id ?? "none", countryData: countryData) {
+                    favourited = true
+                } else {
+                    favourited = false
+                }
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
