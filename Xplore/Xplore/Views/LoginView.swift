@@ -83,11 +83,13 @@ struct LoginView: View {
                         TextFieldComp(textInput: $logModel.Email,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("email"),
-                                      errorMessage: $errModel.emailError)
+                                      errorMessage: $errModel.emailError,
+                                      type: .constant("email"))
                         TextFieldComp(textInput: $logModel.Password,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("password"),
-                                      errorMessage: $errModel.passwordError)
+                                      errorMessage: $errModel.passwordError,
+                                      type: .constant("pass"))
                     }
                     
                     Spacer()

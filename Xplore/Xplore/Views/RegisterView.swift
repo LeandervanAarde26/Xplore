@@ -66,19 +66,23 @@ struct RegisterView: View {
                         TextFieldComp(textInput: $regModel.Username,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("username"),
-                                      errorMessage: $errModel.usernameError)
+                                      errorMessage: $errModel.usernameError,
+                                      type: .constant(""))
                         TextFieldComp(textInput: $regModel.Email,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("email"),
-                                      errorMessage: $errModel.emailError)
+                                      errorMessage: $errModel.emailError,
+                                      type: .constant("email"))
                         TextFieldComp(textInput: $regModel.Password,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("password"),
-                                      errorMessage: $errModel.passwordError)
+                                      errorMessage: $errModel.passwordError,
+                                      type: .constant("pass"))
                         TextFieldComp(textInput: $regModel.ConPassword,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("confirm password"),
-                                      errorMessage: $errModel.passwordConError)
+                                      errorMessage: $errModel.passwordConError,
+                                      type: .constant("pass"))
                     }
                     
                     Text(errModel.pageError)
