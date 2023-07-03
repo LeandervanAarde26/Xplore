@@ -18,6 +18,9 @@ struct XploreApp: App {
             }
             .navigationViewStyle(.stack)
             .environmentObject(userStateViewModel)
+            .onAppear() {
+                userStateViewModel.checkAuth()
+            }
         }
     }
 }
@@ -30,7 +33,11 @@ struct ApplicationSwitcher: View {
         if (userStateViewModel.isLoggedIn) {
             MainNavigation()
         } else {
-            LoginView()
+            if userStateViewModel.isLoginView {
+                LoginView()
+            } else {
+                RegisterView()
+            }
         }
     }
 }
