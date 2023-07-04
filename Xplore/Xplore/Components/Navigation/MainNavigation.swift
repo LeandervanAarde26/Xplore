@@ -9,46 +9,33 @@ import SwiftUI
 import Firebase
 
 struct MainNavigation: View {
-    @State private var loggedIn = false
-    
+    @State private var selectedTab: Int = 0
 
     var body: some View {
-//        if ( Auth.auth().currentUser?.uid != nil ) {
-            TabView{
-                ContentView()
-                .tabItem{
+        TabView(selection: $selectedTab) {
+            ContentView()
+                .tabItem {
                     Label("Home", systemImage: "house")
                 }
-                .onAppear() {
-                    
-                }
-                
-    //            Text("Countries")
-                AddPostView()
-                    .tabItem{
+                .tag(0)
+
+            AddPostView(selectedTab: $selectedTab)
+                .tabItem {
                     Label("New Post", systemImage: "plus.circle.fill")
                 }
-                
-    //            CountryDetailView()
-                FavouritesView()
-                .tabItem{
+                .tag(1)
+
+            FavouritesView()
+                .tabItem {
                     Label("Favorites", systemImage: "heart")
                 }
-                
-                FeedView()
-                .tabItem{
+                .tag(2)
+
+            FeedView()
+                .tabItem {
                     Label("Feed", systemImage: "note.text")
                 }
-            }
-//        } else {
-//            LoginView()
-//        }
-    }
-}
-
-struct MainNavigation_Previews: PreviewProvider {
-    static var previews: some View {
-        MainNavigation()
-          
+                .tag(3)
+        }
     }
 }

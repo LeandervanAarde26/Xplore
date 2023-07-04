@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddPostView: View {
+    @Binding var selectedTab: Int
     @State var selectedCountry: Int = 0
   @State private var description = ""
   @State private var selectedImageURL: URL? = nil
@@ -96,6 +97,7 @@ struct AddPostView: View {
             .tint(Color(red: 0.48, green: 0.53, blue: 0.95))
               Button(action:{
                   Task{
+                      selectedTab = 3
                       try await firebaseViewModel.addUserPost(
                           userId: userVm.getUserId(), postImage: selectedImageURL,
                           postDescription: description, postCountry: countryData.countries[selectedCountry].name?.common ?? "None"

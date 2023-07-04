@@ -81,11 +81,6 @@ class PostViewModel: ObservableObject {
                     return nil
                 }
             }
-            
         }
     }
-    
 }
-
-
-
