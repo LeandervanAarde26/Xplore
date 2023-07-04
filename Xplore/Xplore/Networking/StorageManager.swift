@@ -20,20 +20,20 @@ class StorageManager: ObservableObject{
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         if let data = imageData {
-                storageRef.putData(data, metadata: metadata) { (metadata, error) in
-                    storageRef.downloadURL { (url, error) in
-                        if let error = error {
-                            print("Error retrieving download URL: ", error)
-                            completion(nil, error)
-                            return
-                        }
+            storageRef.putData(data, metadata: metadata) { (metadata, error) in
+                storageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error retrieving download URL: ", error)
+                        completion(nil, error)
+                        return
+                    }
 
-                        if let downloadURL = url {
-                            print("Download URL: ", downloadURL)
-                            completion(downloadURL, nil)
-                        }
+                    if let downloadURL = url {
+                        print("Download URL: ", downloadURL)
+                        completion(downloadURL, nil)
                     }
                 }
+            }
         }
     }
 }

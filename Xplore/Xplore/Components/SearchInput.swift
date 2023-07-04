@@ -18,18 +18,16 @@ struct SearchInput: View {
         HStack{
             Image(systemName: "magnifyingglass")
                 .foregroundColor(Color(.systemGray2))
+            
             TextField(
                 "Search Country",
                 text: $text
             )
-            .onTapGesture {
-                        isSearching = true
-                    }
-//                    .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-//                        isSearching = false
-//                    }
             .frame(height: 48)
             .padding(.horizontal, 15)
+            .onTapGesture {
+                isSearching = true
+            }
             
             Image(systemName: "mic.fill")
                 .foregroundColor(Color(.systemGray2))
@@ -37,7 +35,6 @@ struct SearchInput: View {
         .padding(.horizontal, 6)
         .cornerRadius(8)
         .background(Color(.systemGray6).clipShape(RoundedRectangle(cornerRadius:12)))
-        
     }	
 }
 

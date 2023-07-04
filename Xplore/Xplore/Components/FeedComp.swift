@@ -17,7 +17,6 @@ struct FeedComp: View {
     var body: some View {
         VStack(){
             HStack(spacing: 10){
-                
                 Image("SAFLAG")
                     .resizable()
                     .scaledToFit()
@@ -26,24 +25,17 @@ struct FeedComp: View {
                 
                 Text(Username)
                     .font(.headline)
-                
-            }.frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 5)
-            
-//            AsyncImage(url: URL(string: randomCountry.flags?.png ?? "SAFLAG")) { image in
-//                image
-//                    .resizable()
-//                    .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
-//                    .frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200)
-            
-            AsyncImage(url: URL(string: CountryImage )) { image in
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 5)
+
+            AsyncImage(url: URL(string: CountryImage)) { image in
                 image
                     .resizable()
-//                    .frame(maxWidth: .infinity)
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
-                //nil
+                Text("Loading image...")
             }
             
             Text(Desc)

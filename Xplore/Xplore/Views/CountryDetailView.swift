@@ -102,6 +102,7 @@ struct HeaderView: View {
                     .foregroundColor(.red)
                     .imageScale(.large)
             }
+            .padding()
             .onAppear {
                 if favouritesViewModel.checkIfFavourited(uid: userId, countryId: countryData.id ?? "none", countryData: countryData) {
                     favourited = true
@@ -109,7 +110,6 @@ struct HeaderView: View {
                     favourited = false
                 }
             }
-            .padding()
         }
     }
 }

@@ -12,7 +12,6 @@ import SwiftSVG
 struct splashView: View {
     
     var body: some View {
-//        Outer Container Stack
         VStack() {
             TopMap()
             

@@ -43,7 +43,6 @@ class PostViewModel: ObservableObject {
     func getAllPosts(){
         let userRef = self.db.collection("users")
        
-        
         self.db.collection(self.postColl).getDocuments{(querySnapshot, error ) in
             
             guard let docs = querySnapshot?.documents else{
@@ -81,11 +80,6 @@ class PostViewModel: ObservableObject {
                     return nil
                 }
             }
-            
         }
     }
-    
 }
-
-
-

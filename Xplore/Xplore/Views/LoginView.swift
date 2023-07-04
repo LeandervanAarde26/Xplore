@@ -36,25 +36,12 @@ struct LoginView: View {
         if userVM.errorMessage == "The email address is badly formatted." {
             logModel.Email = "Invalid email address"
         }
-//        //Model usage example code
-//        if !logModel.Email.isEmpty {
-//            //Value from email input
-//            print(logModel.Email)
-//            
-//        } else {
-//            //sets page error
-//            //Check InputModels model for other available errors
-//            errModel.pageError = "Password or email is incorrect"
-//            errModel.emailError = "Email is empty"
-//            
-//        }
     }
 
     var body: some View {
         if userVM.isBusy {
             ProgressView()
         } else {
-            
             NavigationView(){
                 VStack(){
                     Image("Icon")
@@ -75,7 +62,6 @@ struct LoginView: View {
                             .font(.system(.title, weight: .bold))
                             .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
                     }
-                    //                .padding(.top, 40)
                     
                     Spacer()
                     
@@ -121,14 +107,7 @@ struct LoginView: View {
                         Text("Don't have an account?")
                             .foregroundColor(.blue)
                     }
-                    
-//                    NavigationLink() {
-//                        RegisterView()
-//                    } label: {
-//                       
-//                    }
                 }
-                
                 Spacer()
             }
         }
