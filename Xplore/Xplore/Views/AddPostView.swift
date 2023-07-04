@@ -67,11 +67,16 @@ struct AddPostView: View {
               .clipShape(RoundedRectangle(cornerRadius: 12))
 
               Picker("Country: ", selection: $selectedCountry) {
-                  ForEach(countryData.countries.indices, id: \.self) { index in
+                  ForEach(countryData.countries.indices.sorted { (index1, index2) -> Bool in
+                      let country1 = countryData.countries[index1]
+                      let country2 = countryData.countries[index2]
+                      return country1.name?.common ?? "" < country2.name?.common ?? ""
+                  }, id: \.self) { index in
                       let country = countryData.countries[index]
                       Text(country.name?.common ?? " ")
                   }
-              }            .frame(minHeight: 0, maxHeight: 115)
+              }
+              .frame(minHeight: 0, maxHeight: 115)
               .pickerStyle(.wheel)
           }
           .padding(.horizontal, 20)
