@@ -42,7 +42,7 @@ struct FeedView: View {
             Divider()
             
             ScrollView {
-                ForEach(viewModel.posts.indices, id: \.self) { index in
+                ForEach(viewModel.posts.indices.reversed(), id: \.self) { index in
                     let post = viewModel.posts[index]
 
                     if let description = post.description,
