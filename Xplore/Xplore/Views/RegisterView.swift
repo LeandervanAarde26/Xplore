@@ -14,11 +14,17 @@ struct RegisterView: View {
     @StateObject private var regModel = InputRegData()
     @StateObject private var errModel = InputErrors()
     @State private var selectedImageURL: URL? = nil
+    
     @EnvironmentObject var userVM: UserStateViewModel
     
     func Register() async {
+        errModel.usernameError = ""
         errModel.emailError = ""
         errModel.passwordError = ""
+        
+        if regModel.Email.isEmpty {
+            errModel.usernameError = "Please enter your username"
+        }
         
         if regModel.Email.isEmpty {
             errModel.emailError = "Please enter your email"
@@ -32,8 +38,12 @@ struct RegisterView: View {
             return
         }
         
-        await userVM.Register(email: regModel.Email, password: regModel.Password, username: regModel.Username, profileURL: "")
-    }
+        await userVM.Register(email: regModel.Email,
+                              conPassword: regModel.ConPassword,
+                              password: regModel.Password,
+                              username: regModel.Username,
+                              profileURL: selectedImageURL ?? URL(string: "https://example.com/default_image.png")!)
+        }
 
     var body: some View {
         if userVM.isBusy {
@@ -63,6 +73,7 @@ struct RegisterView: View {
                     
                     VStack(spacing: 20){
                         PhotoPicker(imageUrl: $selectedImageURL)
+                        Spacer()
                         TextFieldComp(textInput: $regModel.Username,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("username"),
@@ -85,7 +96,7 @@ struct RegisterView: View {
                                       type: .constant("pass"))
                     }
                     
-                    Text(errModel.pageError)
+                    Text(userVM.errorMessage)
                         .foregroundColor(Color.red)
                         .padding( 15)
                     

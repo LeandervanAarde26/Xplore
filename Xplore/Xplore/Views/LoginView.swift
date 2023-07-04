@@ -80,7 +80,7 @@ struct LoginView: View {
                     
                     Spacer()
                     
-                    Text(errModel.pageError)
+                    Text(userVM.errorMessage)
                         .foregroundColor(Color.red)
                         .padding(10)
                     
