@@ -14,6 +14,7 @@ struct RegisterView: View {
     @StateObject private var regModel = InputRegData()
     @StateObject private var errModel = InputErrors()
     @State private var selectedImageURL: URL? = nil
+    
     @EnvironmentObject var userVM: UserStateViewModel
     
     func Register() async {
@@ -32,8 +33,12 @@ struct RegisterView: View {
             return
         }
         
-        await userVM.Register(email: regModel.Email, password: regModel.Password, username: regModel.Username, profileURL: "")
-    }
+        await userVM.Register(email: regModel.Email,
+                              password: regModel.Password,
+                              username: regModel.Username,
+                              profileURL: selectedImageURL ?? URL(string: "https://example.com/default_image.png")!)
+
+        }
 
     var body: some View {
         if userVM.isBusy {

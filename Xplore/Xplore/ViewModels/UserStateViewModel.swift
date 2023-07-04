@@ -7,12 +7,14 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import SwiftUI
 
 class UserStateViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var isBusy: Bool = false
     @Published var errorMessage: String = ""
     @Published var isLoginView = true
+    @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
     
     private var db = Firestore.firestore()
     
@@ -78,7 +80,7 @@ class UserStateViewModel: ObservableObject {
 //        }
     }
     
-    func Register(email: String, password: String, username: String, profileURL: String) async {
+    func Register(email: String, password: String, username: String, profileURL: URL?) async {
         DispatchQueue.main.async {
             self.isBusy = true
         }
@@ -90,12 +92,21 @@ class UserStateViewModel: ObservableObject {
             
             print("Signed up as user \(user.uid), with email: \(user.email ?? "")")
             
-            createUserDB(username: username, email: email, profileURL: profileURL, userId: user.uid)
-            
-            DispatchQueue.main.async {
-                self.isBusy = false
-                self.isLoggedIn = true
+            await viewModel.uploadImage(fromURL: profileURL) { (uri, error) in
+                if let error = error {
+                    print("Error: \(error)")
+                } else if let uri = uri {
+                    // Handle the uploaded image URI here
+                    print("Uploaded image URI:", uri)
+                    self.createUserDB(username: username, email: email, profileURL: uri.absoluteString, userId: user.uid)
+                    
+                    DispatchQueue.main.async {
+                        self.isBusy = false
+                        self.isLoggedIn = true
+                    }
+                }
             }
+            
         } catch {
             print("There was an issue when trying to sign up: \(error)")
             
@@ -104,8 +115,11 @@ class UserStateViewModel: ObservableObject {
                 self.errorMessage = error.localizedDescription
             }
         }
-
     }
+    
+//    func uploadProfile(){
+//
+//    }
     
     func Login(email: String, password: String) async {
         
