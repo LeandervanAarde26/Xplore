@@ -48,12 +48,13 @@ struct FeedView: View {
                     if let description = post.description,
                        let username = post.user?.username,
                        let image = post.image,
+                       let userImage = post.user?.profileURL,
                        let country = post.country {
                         FeedComp(
                             ContextualType: .constant("Test \(index)"),
                             Desc: .constant(description),
                             Username: .constant(username),
-                            UserImage: .constant(image),
+                            UserImage: .constant(userImage),
                             CountryName: .constant(country),
                             CountryImage: .constant(image)
                         )

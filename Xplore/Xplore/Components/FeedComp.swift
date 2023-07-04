@@ -17,11 +17,16 @@ struct FeedComp: View {
     var body: some View {
         VStack(){
             HStack(spacing: 10){
-                Image("SAFLAG")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 45)
-                    .clipShape(Circle())
+                
+                AsyncImage(url: URL(string: UserImage)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 45)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Text("...")
+                }
                 
                 Text(Username)
                     .font(.headline)
