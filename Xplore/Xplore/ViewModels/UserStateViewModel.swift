@@ -14,7 +14,7 @@ class UserStateViewModel: ObservableObject {
     @Published var isBusy: Bool = false
     @Published var errorMessage: String = ""
     @Published var isLoginView = true
-    @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
+    @ObservedObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
     @Published var userDetails: User?
     
     private var db = Firestore.firestore()
@@ -83,7 +83,7 @@ class UserStateViewModel: ObservableObject {
                 
                 print("Signed up as user \(user.uid), with email: \(user.email ?? "")")
                 
-                await viewModel.uploadImage(fromURL: profileURL) { (uri, error) in
+                viewModel.uploadImage(fromURL: profileURL) { (uri, error) in
                     if let error = error {
                         print("Error: \(error)")
                     } else if let uri = uri {
