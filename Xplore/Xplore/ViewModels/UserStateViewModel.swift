@@ -70,56 +70,48 @@ class UserStateViewModel: ObservableObject {
         data["profileURL"] = profileURL
         
         db.collection("users").document(userId).setData(data)
-        
-//        db.collection("users").addDocument(data: data) { error in
-//            if let error = error {
-//                print("Error adding document: \(error)")
-//            } else {
-//                print("Document added successfully")
-//            }
-//        }
     }
     
-    func Register(email: String, password: String, username: String, profileURL: URL?) async {
-        DispatchQueue.main.async {
-            self.isBusy = true
-        }
-        
-        do {
-            let authDataResult = try await
-            Auth.auth().createUser(withEmail: email, password: password)
-            let user = authDataResult.user
+    func Register(email: String, conPassword: String, password: String, username: String, profileURL: URL?) async {
+        if !conPassword.isEmpty && conPassword == password {
+            DispatchQueue.main.async {
+                self.isBusy = true
+            }
             
-            print("Signed up as user \(user.uid), with email: \(user.email ?? "")")
-            
-            await viewModel.uploadImage(fromURL: profileURL) { (uri, error) in
-                if let error = error {
-                    print("Error: \(error)")
-                } else if let uri = uri {
-                    // Handle the uploaded image URI here
-                    print("Uploaded image URI:", uri)
-                    self.createUserDB(username: username, email: email, profileURL: uri.absoluteString, userId: user.uid)
-                    
-                    DispatchQueue.main.async {
-                        self.isBusy = false
-                        self.isLoggedIn = true
+            do {
+                let authDataResult = try await
+                Auth.auth().createUser(withEmail: email, password: password)
+                let user = authDataResult.user
+                
+                print("Signed up as user \(user.uid), with email: \(user.email ?? "")")
+                
+                await viewModel.uploadImage(fromURL: profileURL) { (uri, error) in
+                    if let error = error {
+                        print("Error: \(error)")
+                    } else if let uri = uri {
+                        // Handle the uploaded image URI here
+                        print("Uploaded image URI:", uri)
+                        self.createUserDB(username: username, email: email, profileURL: uri.absoluteString, userId: user.uid)
+                        
+                        DispatchQueue.main.async {
+                            self.isBusy = false
+                            self.isLoggedIn = true
+                        }
                     }
                 }
+                
+            } catch {
+                print("There was an issue when trying to sign up: \(error)")
+                
+                DispatchQueue.main.async {
+                    self.isBusy = false
+                    self.errorMessage = error.localizedDescription
+                }
             }
-            
-        } catch {
-            print("There was an issue when trying to sign up: \(error)")
-            
-            DispatchQueue.main.async {
-                self.isBusy = false
-                self.errorMessage = error.localizedDescription
-            }
+        } else {
+            self.errorMessage = "Passwords don't match"
         }
     }
-    
-//    func uploadProfile(){
-//
-//    }
     
     func Login(email: String, password: String) async {
         

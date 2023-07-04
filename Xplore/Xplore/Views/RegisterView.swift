@@ -18,8 +18,13 @@ struct RegisterView: View {
     @EnvironmentObject var userVM: UserStateViewModel
     
     func Register() async {
+        errModel.usernameError = ""
         errModel.emailError = ""
         errModel.passwordError = ""
+        
+        if regModel.Email.isEmpty {
+            errModel.usernameError = "Please enter your username"
+        }
         
         if regModel.Email.isEmpty {
             errModel.emailError = "Please enter your email"
@@ -34,10 +39,10 @@ struct RegisterView: View {
         }
         
         await userVM.Register(email: regModel.Email,
+                              conPassword: regModel.ConPassword,
                               password: regModel.Password,
                               username: regModel.Username,
                               profileURL: selectedImageURL ?? URL(string: "https://example.com/default_image.png")!)
-
         }
 
     var body: some View {
@@ -68,6 +73,7 @@ struct RegisterView: View {
                     
                     VStack(spacing: 20){
                         PhotoPicker(imageUrl: $selectedImageURL)
+                        Spacer()
                         TextFieldComp(textInput: $regModel.Username,
                                       failed: $errModel.errIcon,
                                       placeholder: .constant("username"),
@@ -90,7 +96,7 @@ struct RegisterView: View {
                                       type: .constant("pass"))
                     }
                     
-                    Text(errModel.pageError)
+                    Text(userVM.errorMessage)
                         .foregroundColor(Color.red)
                         .padding( 15)
                     
