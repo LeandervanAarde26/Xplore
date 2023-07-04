@@ -4,7 +4,6 @@ import Firebase
 
 @main
 struct XploreApp: App {
-    
     init() {
         FirebaseApp.configure()
     }
@@ -13,11 +12,11 @@ struct XploreApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView{
-                ApplicationSwitcher()
+            NavigationView {
+                ApplicationSwitcher(userStateViewModel: userStateViewModel) // Pass the userStateViewModel here
             }
             .navigationViewStyle(.stack)
-            .environmentObject(userStateViewModel)
+            .environmentObject(userStateViewModel) // Remove this line if not needed elsewhere
             .onAppear() {
                 userStateViewModel.checkAuth()
             }
@@ -26,11 +25,10 @@ struct XploreApp: App {
 }
 
 struct ApplicationSwitcher: View {
-    
-    @EnvironmentObject var userStateViewModel: UserStateViewModel
-    
+    @ObservedObject var userStateViewModel: UserStateViewModel
+
     var body: some View {
-        if (userStateViewModel.isLoggedIn) {
+        if userStateViewModel.isLoggedIn {
             MainNavigation()
         } else {
             if userStateViewModel.isLoginView {

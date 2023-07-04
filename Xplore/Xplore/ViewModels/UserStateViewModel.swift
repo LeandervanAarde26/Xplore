@@ -9,12 +9,43 @@ import FirebaseFirestoreSwift
 import FirebaseFirestore
 
 class UserStateViewModel: ObservableObject {
-    @Published var isLoggedIn: Bool = true
+    @Published var isLoggedIn: Bool = false
     @Published var isBusy: Bool = false
     @Published var errorMessage: String = ""
     @Published var isLoginView = true
     
     private var db = Firestore.firestore()
+    
+    func signOutUser() async {
+        do {
+            let signOutResult = try await Auth.auth().signOut()
+            
+            DispatchQueue.main.async {
+                print("Logged out")
+                self.isBusy = false
+                self.isLoggedIn = false
+                self.isLoginView = true
+            }
+            print("You signed out")
+        } catch {
+            print("Error signing out: %@", error.localizedDescription)
+        }
+    }
+    
+    func getUserDetails(userId: String) {
+        print("This is the user id")
+        print(userId)
+        let docRef = db.collection("users").document(userId)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     func getUserId() -> String {
         return Auth.auth().currentUser?.uid ?? "No user id found"
@@ -28,7 +59,7 @@ class UserStateViewModel: ObservableObject {
         }
     }
     
-    func createUserDB(username: String, email: String, profileURL: String) {
+    func createUserDB(username: String, email: String, profileURL: String, userId: String) {
         var data: [String: Any] = [:]
         
         data["username"] = username
@@ -36,13 +67,15 @@ class UserStateViewModel: ObservableObject {
         data["posts"] = []
         data["profileURL"] = profileURL
         
-        db.collection("users").addDocument(data: data) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Document added successfully")
-            }
-        }
+        db.collection("users").document(userId).setData(data)
+        
+//        db.collection("users").addDocument(data: data) { error in
+//            if let error = error {
+//                print("Error adding document: \(error)")
+//            } else {
+//                print("Document added successfully")
+//            }
+//        }
     }
     
     func Register(email: String, password: String, username: String, profileURL: String) async {
@@ -57,7 +90,7 @@ class UserStateViewModel: ObservableObject {
             
             print("Signed up as user \(user.uid), with email: \(user.email ?? "")")
             
-            createUserDB(username: username, email: email, profileURL: profileURL)
+            createUserDB(username: username, email: email, profileURL: profileURL, userId: user.uid)
             
             DispatchQueue.main.async {
                 self.isBusy = false

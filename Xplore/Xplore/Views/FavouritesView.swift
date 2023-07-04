@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct FavouritesView: View {
+    @EnvironmentObject var userVM: UserStateViewModel
+    
+    func signOut() async {
+        await userVM.signOutUser()
+    }
+    
     var body: some View {
         VStack(){
             HStack(alignment: VerticalAlignment.center){
@@ -39,6 +45,38 @@ struct FavouritesView: View {
             }.padding(.top, 10)
                 .padding(.bottom, 20)
             
+            HStack {
+                Image("SAFLAG")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxHeight: 50)
+                    .clipShape(Circle())
+                
+                Spacer()
+                
+                //Text
+                Text("Username")
+                
+                Spacer()
+                //Button
+                Button(){
+                    // Add Task
+                    Task {
+                        await signOut()
+                    }
+                } label: {
+                    Text("Logout")
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical, 5)
+                        .background(Color(.red))
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
+                }
+            }
+            .padding(10)
+            
             ScrollView(){
                 VStack(spacing: 35){
                     ForEach(0..<10) {
@@ -59,6 +97,9 @@ struct FavouritesView: View {
             
             Spacer()
             
+        }
+        .onAppear() {
+            userVM.getUserDetails(userId: userVM.getUserId())
         }
     }
 }
