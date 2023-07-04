@@ -42,8 +42,10 @@ struct FeedView: View {
             Divider()
             
             ScrollView {
-                ForEach(viewModel.posts.indices.reversed(), id: \.self) { index in
-                    let post = viewModel.posts[index]
+                let reversedPosts = viewModel.posts.reversed()
+                
+                ForEach(reversedPosts.indices, id: \.self) { index in
+                    let post = reversedPosts[index]
 
                     if let description = post.description,
                        let username = post.user?.username,
