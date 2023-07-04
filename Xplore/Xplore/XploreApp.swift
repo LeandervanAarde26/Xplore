@@ -30,6 +30,9 @@ struct ApplicationSwitcher: View {
     var body: some View {
         if userStateViewModel.isLoggedIn {
             MainNavigation()
+                .onAppear() {
+                    userStateViewModel.getUserDetails()
+                }
         } else {
             if userStateViewModel.isLoginView {
                 LoginView()

@@ -52,5 +52,4 @@ class FavouritesViewModel: ObservableObject {
             return false
         }
     }
-    
 }

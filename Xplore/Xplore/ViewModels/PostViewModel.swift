@@ -4,18 +4,18 @@ import FirebaseFirestoreSwift
 
 class PostViewModel: ObservableObject {
     private var db = Firestore.firestore()
-    @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
+    @ObservedObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
     private var postColl = DatabaseKeys.Countries.postCollection
     @Published var posts : [ViewPostModel] = []
     
-    func addUserPost(userId: String, postImage: URL?, postDescription: String, postCountry: String) async throws {
+    func addUserPost(userId: String, postImage: URL?, postDescription: String, postCountry: String) {
         do {
             guard let imageURL = postImage else {
                 print("Error: Invalid image URL")
                 return
             }
 
-            try await viewModel.uploadImage(fromURL: imageURL) { (uri, error) in
+            viewModel.uploadImage(fromURL: imageURL) { (uri, error) in
                 if let error = error {
                     print("Error: \(error)")
                 } else if let uri = uri {
@@ -43,7 +43,6 @@ class PostViewModel: ObservableObject {
     func getAllPosts(){
         let userRef = self.db.collection("users")
        
-        
         self.db.collection(self.postColl).getDocuments{(querySnapshot, error ) in
             
             guard let docs = querySnapshot?.documents else{
@@ -81,11 +80,6 @@ class PostViewModel: ObservableObject {
                     return nil
                 }
             }
-            
         }
     }
-    
 }
-
-
-

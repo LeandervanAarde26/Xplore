@@ -21,8 +21,6 @@ class countryViewModel: ObservableObject{
                 return
             }
             
-            
-            
             self.countries = documents.compactMap { queryDocumentSnapshot in
                 do {
                     return try queryDocumentSnapshot.data(as: Country.self)
@@ -33,5 +31,5 @@ class countryViewModel: ObservableObject{
             }
         }
     }
-    
 }
+

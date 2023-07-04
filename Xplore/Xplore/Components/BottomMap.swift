@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BottomMap: View {
     @State var bouncePin = false
+    @State private var scale: CGFloat = 1.0
+    
     var body: some View {
         VStack() {
             Spacer()
@@ -17,27 +19,30 @@ struct BottomMap: View {
                     .rotationEffect(.degrees(180))
                 
                 Image("purple-pin")
-                    .offset(x: 80, y: bouncePin ? -70 : -60)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
-                    
+                    .offset(x: 90, y: -70)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
+        
                 Image("yellow-pin")
-                    .offset(x: -60, y: bouncePin ? 10 : 20)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
+                    .offset(x: -60, y: 20)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
             
                 Image("light-blue-pin")
-                    .offset(x: 0, y: bouncePin ? -30 : -40)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
+                    .offset(x: 0, y: -40)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
                 
                 Image("dark-blue-pin")
-                    .offset(x: 115, y: bouncePin ? 10 : 0)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
+                    .offset(x: 140, y: 20)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
             }
-
-        }
-        .onAppear {
-            bouncePin = true
         }
         .padding(.bottom)
+        .onAppear {
+            scale = 1.1
+        }
     }
 }
 
