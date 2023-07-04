@@ -17,31 +17,40 @@ class FavouritesViewModel: ObservableObject {
     private var db = Firestore.firestore()
     
     func FavouriteCountry(uid: String, countryId: String) {
+        let docRef = db.collection("countries").document(countryId)
         
-        let fav = FavouriteModel(userId: uid)
-        
-        do {
-            
-        try db.collection("countries").document(countryId).setData(["favourited": [uid]], merge: true)
-            
-            print(countryId)
-            
+        let newValue = uid
+
+        docRef.updateData(["favourited": FieldValue.arrayUnion([newValue])]) {
+            error in
+            if let error = error {
+                print(error)
+            } else {
+                print ("favourited :\(uid). Country: \(countryId)")
+            }
         }
+    }
+    
+    func delFavouriteCountry(uid: String, countryId: String) {
+        let docRef = db.collection("countries").document(countryId)
         
-        catch {
-            
-            print(error)
-            
+        let newValue = uid
+        
+        docRef.updateData(["favourited": FieldValue.arrayRemove([newValue])]){ error in
+            if let error = error {
+                print(error)
+            } else {
+                print ("removed favourite :\(uid). Country: \(countryId)")
+            }
         }
-        
-//        docRef.setData(fav) { error in
-//            if let error = error {
-//                print("Error while posting document: \(error)")
-//            } else {
-//                print("Document has been added")
-//            }
-//        }
-        
+    }
+    
+    func checkIfFavourited(uid: String, countryId: String, countryData: Country)-> Bool{
+        if countryData.favourited?.contains(uid) ?? false{
+            return true
+        } else {
+            return false
+        }
     }
     
 }

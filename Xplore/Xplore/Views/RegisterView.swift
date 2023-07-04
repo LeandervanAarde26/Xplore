@@ -104,6 +104,13 @@ struct RegisterView: View {
                         .cornerRadius(10)
                         .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
                     
+                    Button() {
+                        userVM.isLoginView = true
+                    } label: {
+                        Text("Already have an account?")
+                            .foregroundColor(.blue)
+                    }
+                    
                     Spacer()
                     
                 }
