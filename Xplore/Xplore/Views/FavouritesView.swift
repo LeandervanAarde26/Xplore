@@ -108,8 +108,9 @@ struct FavouritesView: View {
                                 }
                             }
                         }
-                    .listStyle(PlainListStyle())
+                   
                 }
+                .listStyle(PlainListStyle())
                 .onAppear() {
                     self.favoriteCountries.fetchData()
                 }
