@@ -11,18 +11,25 @@ struct FavoritesCard: View {
     @Binding var Country: String
     @Binding var SmallInfo: String
     @Binding var ContextualType: String
-    
+    @Binding var CountryImage: String
+    @Binding var CountryId: String
     var body: some View {
+        Divider()
         HStack{
-            Image("SAFLAG")
-                .resizable()
-                .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
-                .frame(
-                    minWidth: 0,
-                    maxWidth: 80,
-                    minHeight: 0,
-                    maxHeight: 70
+            
+            AsyncImage(url: URL(string: CountryImage )) { image in
+                image
+                    .resizable()
+                    .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: 80,
+                        minHeight: 0,
+                        maxHeight: 70
                     )
+            } placeholder: {
+                //nil
+            }
             Spacer()
             VStack(alignment: .leading){
                 Text(Country)
@@ -36,7 +43,7 @@ struct FavoritesCard: View {
                 .foregroundColor(.red)
                 .frame(width: 50,height: 50)
         }
-        
+       
         .background(Color.white)
         .padding(.horizontal, 10)
         
@@ -48,8 +55,8 @@ struct FavoritesCard: View {
     } 
 }
 
-struct FavoritesCard_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoritesCard(Country: .constant("Country name"), SmallInfo: .constant("Small info"), ContextualType: .constant("Country name"))
-    }
-}
+//struct FavoritesCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FavoritesCard(Country: .constant("Country name"), SmallInfo: .constant("Small info"), ContextualType: .constant("Country name"))
+//    }
+//}

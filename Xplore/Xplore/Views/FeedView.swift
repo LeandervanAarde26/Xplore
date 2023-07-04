@@ -44,8 +44,7 @@ struct FeedView: View {
             ScrollView {
                 ForEach(viewModel.posts.indices, id: \.self) { index in
                     let post = viewModel.posts[index]
-                    
-                    // Filter out empty posts
+
                     if let description = post.description,
                        let username = post.user?.username,
                        let image = post.image,

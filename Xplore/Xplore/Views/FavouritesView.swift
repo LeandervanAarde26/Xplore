@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavouritesView: View {
     @EnvironmentObject var userVM: UserStateViewModel
+    @StateObject private var favoriteCountries = Favorites()
     
     func signOut() async {
         await userVM.signOutUser()
@@ -77,30 +78,54 @@ struct FavouritesView: View {
             }
             .padding(10)
             
-            ScrollView(){
+//            ScrollView(){
                 VStack(spacing: 35){
-                    ForEach(0..<10) {
-                        Divider()
-                        FavoritesCard(Country: .constant("Country Name"),
-                                      SmallInfo: .constant("Smallinfo"),
-                                      ContextualType: .constant("Test \($0)"))
+                    List {
+                        ForEach(favoriteCountries.favorites.indices, id: \.self) { index in
+                            let fav = favoriteCountries.favorites[index]
+                            
+                            if let countryName = fav.name?.common,
+                                let region = fav.subregion,
+                                let docID = fav.id,
+                                let flag = fav.flags?.png
+                            {
+                                FavoritesCard(
+                                    Country: .constant(countryName),
+                                    SmallInfo: .constant(region),
+                                    ContextualType: .constant("Test \(index)"),
+                                    CountryImage: .constant(flag),
+                                    CountryId: .constant(docID)
+                                )
+                            }
+                        }
+                        .onDelete { indices in
+                            for index in indices {
+                                let fav = favoriteCountries.favorites[index]
+                                if let docID = fav.id {
+                                    favoriteCountries.removeFromFavorites(uid: docID)
+                                }
+                            }
+                        }
                     }
-                    
-                }.frame(
+                    .listStyle(PlainListStyle())
+                }
+                .onAppear() {
+                    userVM.getUserDetails(userId: userVM.getUserId())
+                    self.favoriteCountries.fetchData()
+                }
+                .frame(
                     minWidth: 0,
                     maxWidth: .infinity,
                     minHeight: 0,
                     maxHeight: .infinity,
                     alignment: .topLeading
                 )
-            }
+//            }
             
             Spacer()
             
         }
-        .onAppear() {
-            userVM.getUserDetails(userId: userVM.getUserId())
-        }
+
     }
 }
 
