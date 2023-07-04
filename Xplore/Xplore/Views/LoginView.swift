@@ -115,7 +115,6 @@ struct LoginView: View {
                             .padding()
                     }
 
-                    
                     Button() {
                         userVM.isLoginView = false
                     } label: {

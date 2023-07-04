@@ -28,4 +28,3 @@ class InputLogData: ObservableObject {
     @Published var Password: String = ""
     @Published var Email: String = ""
 }
-

@@ -39,8 +39,9 @@ struct FeedComp: View {
             AsyncImage(url: URL(string: CountryImage )) { image in
                 image
                     .resizable()
-                    .frame(width: .infinity, height: 240)
+//                    .frame(maxWidth: .infinity)
                     .scaledToFit()
+                    .aspectRatio(contentMode: .fit)
             } placeholder: {
                 //nil
             }

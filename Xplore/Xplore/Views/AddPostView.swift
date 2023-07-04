@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AddPostView: View {
-  var plaecholderCountries = ["South Africa", "France", "Italy", "United States"]
-  @State var selectedCountry = "South Afica"
-  @State private var description = ""
-  @State private var selectedImageURL: URL? = nil
-  @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
-  @State private var firebaseViewModel = PostViewModel()
-  @ObservedObject private var countryData = countryViewModel()
-  @ObservedObject private var userVm = UserStateViewModel()
+    var plaecholderCountries = ["South Africa", "France", "Italy", "United States"]
+    @State var selectedCountry = "South Afica"
+    @State private var description = ""
+    @State private var selectedImageURL: URL? = nil
+    @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
+    @State private var firebaseViewModel = PostViewModel()
+    @ObservedObject private var countryData = countryViewModel()
+    @EnvironmentObject private var userVm: UserStateViewModel
     
   var body: some View {
     ScrollView {
@@ -85,7 +85,7 @@ struct AddPostView: View {
           .tint(Color(red: 0.48, green: 0.53, blue: 0.95))
             Button(action:{
                 Task{
-                    try await firebaseViewModel.addUserPost(
+                    firebaseViewModel.addUserPost(
                         userId: userVm.getUserId(), postImage: selectedImageURL,
                         postDescription: description, postCountry: selectedCountry
                     )
@@ -106,6 +106,8 @@ struct AddPostView: View {
       }
     .onAppear() {
         self.countryData.fetchData()
+        print("Hey post view this is the user details")
+        print(userVm.userDetails ?? "No user details was found")
     }
     }
   }

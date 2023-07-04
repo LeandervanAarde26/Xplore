@@ -9,11 +9,7 @@ import SwiftUI
 
 struct FavouritesView: View {
     @EnvironmentObject var userVM: UserStateViewModel
-    
-    func signOut() async {
-        await userVM.signOutUser()
-    }
-    
+        
     var body: some View {
         VStack(){
             HStack(alignment: VerticalAlignment.center){
@@ -42,28 +38,34 @@ struct FavouritesView: View {
                 
                 Spacer()
                 
-            }.padding(.top, 10)
-                .padding(.bottom, 20)
+            }
+            .padding(.top, 10)
+            .padding(.bottom, 20)
             
             HStack {
-                Image("SAFLAG")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxHeight: 50)
-                    .clipShape(Circle())
+                AsyncImage(url: URL(string: userVM.userDetails?.profileURL ?? "")) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 70)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Image(systemName: userVM.userDetails?.profileURL != nil ? "person.crop.circle" : "")
+                        .font(.system(size: 50))
+                        .scaledToFit()
+                        .frame(maxHeight: 70)
+                        .clipShape(Circle())
+                        .aspectRatio(contentMode: .fit)
+                }
                 
                 Spacer()
                 
-                //Text
-                Text("Username")
+                Text(userVM.userDetails?.username ?? "No username found")
                 
                 Spacer()
-                //Button
+                
                 Button(){
-                    // Add Task
-                    Task {
-                        await signOut()
-                    }
+                    userVM.signOutUser()
                 } label: {
                     Text("Logout")
                         .bold()
@@ -81,9 +83,11 @@ struct FavouritesView: View {
                 VStack(spacing: 35){
                     ForEach(0..<10) {
                         Divider()
-                        FavoritesCard(Country: .constant("Country Name"),
-                                      SmallInfo: .constant("Smallinfo"),
-                                      ContextualType: .constant("Test \($0)"))
+                        FavoritesCard(
+                            Country: .constant("Country Name"),
+                            SmallInfo: .constant("Smallinfo"),
+                            ContextualType: .constant("Test \($0)")
+                        )
                     }
                     
                 }.frame(
@@ -96,10 +100,6 @@ struct FavouritesView: View {
             }
             
             Spacer()
-            
-        }
-        .onAppear() {
-            userVM.getUserDetails(userId: userVM.getUserId())
         }
     }
 }
