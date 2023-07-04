@@ -15,39 +15,37 @@ class UserStateViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isLoginView = true
     @StateObject private var viewModel = ImageUploadViewModel(storageManager: StorageManager())
+    @Published var userDetails: User?
     
     private var db = Firestore.firestore()
     
-    func signOutUser() async {
+    func signOutUser() {
         do {
-            let signOutResult = try await Auth.auth().signOut()
+            try Auth.auth().signOut()
             
-            DispatchQueue.main.async {
-                print("Logged out")
-                self.isBusy = false
-                self.isLoggedIn = false
-                self.isLoginView = true
-            }
-            print("You signed out")
+            self.isBusy = false
+            self.isLoggedIn = false
+            self.isLoginView = true
         } catch {
             print("Error signing out: %@", error.localizedDescription)
         }
     }
     
-    func getUserDetails(userId: String) {
-        print("This is the user id")
-        print(userId)
-        let docRef = db.collection("users").document(userId)
+    func getUserDetails() {
+            let userId = getUserId()
 
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-            } else {
-                print("Document does not exist")
+            db.collection("users").document(userId).getDocument { [weak self] document, error in
+                guard let self = self else { return }
+
+                if let document = document, document.exists {
+                    if let userData = try? document.data(as: User.self) {
+                        self.userDetails = userData
+                    } else {
+                        print(error?.localizedDescription ?? "Problem with decoding document")
+                    }
+                }
             }
         }
-    }
     
     func getUserId() -> String {
         return Auth.auth().currentUser?.uid ?? "No user id found"

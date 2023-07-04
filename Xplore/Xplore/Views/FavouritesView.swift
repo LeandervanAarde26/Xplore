@@ -11,10 +11,6 @@ struct FavouritesView: View {
     @EnvironmentObject var userVM: UserStateViewModel
     @StateObject private var favoriteCountries = Favorites()
     
-    func signOut() async {
-        await userVM.signOutUser()
-    }
-    
     var body: some View {
         VStack(){
             HStack(alignment: VerticalAlignment.center){
