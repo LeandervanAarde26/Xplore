@@ -1,23 +1,45 @@
 import SwiftUI
 import FirebaseCore
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        return true
-    }
-}
+import Firebase
 
 @main
 struct XploreApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    let persistenceController = PersistenceController.shared
-
+    init() {
+        FirebaseApp.configure()
+    }
+    
+    @StateObject var userStateViewModel = UserStateViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            MainNavigation()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView {
+                ApplicationSwitcher(userStateViewModel: userStateViewModel) // Pass the userStateViewModel here
+            }
+            .navigationViewStyle(.stack)
+            .environmentObject(userStateViewModel) // Remove this line if not needed elsewhere
+            .onAppear() {
+                userStateViewModel.checkAuth()
+            }
         }
     }
 }
+
+struct ApplicationSwitcher: View {
+    @ObservedObject var userStateViewModel: UserStateViewModel
+
+    var body: some View {
+        if userStateViewModel.isLoggedIn {
+            MainNavigation()
+                .onAppear() {
+                    userStateViewModel.getUserDetails()
+                }
+        } else {
+            if userStateViewModel.isLoginView {
+                LoginView()
+            } else {
+                RegisterView()
+            }
+        }
+    }
+}
+

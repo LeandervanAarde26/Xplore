@@ -8,52 +8,60 @@
 import SwiftUI
 
 struct SearchDropdown: View {
-    struct Person: Identifiable {
-            let id: UUID
-            let name: String
-        }
-    let names: [Person] = [
-            Person(id: UUID(), name: "John"),
-            Person(id: UUID(), name: "Jane"),
-            Person(id: UUID(), name: "Alice"),
-            Person(id: UUID(), name: "Vian"),
-            Person(id: UUID(), name: "Reinhardt"),
-            Person(id: UUID(), name: "Leander")
-        ]
+    @Binding var searchTerm: String
+    @Binding var Data: [Country]
     
-    var body: some View {
-        VStack(){
-            List(names) { name in
-                HStack {
-                    Image("SAFLAG")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(
-                            minWidth: 0,
-                            maxWidth: 40,
-                            minHeight: 0,
-                            maxHeight: 70
-                        )
-                        .frame(width: 40, height: 40) // Adjust the width and height of the image as needed
-                    Spacer()
-                    Text(name.name)
-                    Spacer()
-                }
-            }
-            .listStyle(PlainListStyle()) // Optional:
-            .background(Color.clear)
+    var filteredCountries: [Country] {
+        guard !searchTerm.isEmpty else {
+            return Data
         }
-        .background(Color.clear)
-        .frame(
-        minWidth: 0,
-        maxWidth: .infinity,
-        minHeight: 20,
-        maxHeight: 500)
+
+        let lowercasedQuery = searchTerm.lowercased()
+
+        return Data.filter { singleCountry in
+            singleCountry.name?.common?.lowercased().contains(lowercasedQuery) ?? false
+        }
+    }
+
+    var body: some View {
+        ScrollView {
+            LazyVStack {
+                ForEach(filteredCountries) { country in
+                    NavigationLink(
+                        destination: CountryDetailView(countryData: .constant(country)),
+                        label: {
+                            HStack {
+                                AsyncImage(url: URL(string: country.flags?.png ?? "SAFLAG")) { image in
+                                    image.resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(
+                                            minWidth: 0,
+                                            maxWidth: 40,
+                                            minHeight: 0,
+                                            maxHeight: 70
+                                        )
+                                        .frame(width: 40, height: 40)
+                                    } placeholder: {
+
+                                    }.frame(width: 40, height: 40)
+
+                                    Spacer()
+
+                                    Text(country.name?.common ?? "Country Name")
+
+                                    Spacer()
+                                }
+                        }
+                    )
+                    }
+            }
+        }
+        .frame(maxHeight: 250)
     }
 }
 
-struct SearchDropdown_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchDropdown()
-    }
-}
+//struct SearchDropdown_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchDropdown(searchTerm: .constant(""), Data: [Country])
+//    }
+//}

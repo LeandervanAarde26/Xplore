@@ -8,109 +8,152 @@
 import SwiftUI
 
 struct CountryDetailView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Binding var countryData: Country
     
     var body: some View {
         NavigationView {
-            VStack() {
-                HStack( spacing: 25 ) {
-                    Image("purple-pin")
-                    
-                    Text("Columbia").font(.system(size: 28, weight: .bold)).foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
-                }
-                .padding([.bottom], 30)
-                
-                VStack() {
-                    Image(systemName: "heart")
-                        .foregroundColor(.red)
-                        .imageScale(.large)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding([.bottom], 5)
-                        
-                    
-                    Image("SAFLAG")
+            VStack {
+                AsyncImage(url: URL(string: countryData.flags?.png ?? "SAFLAG")) { image in
+                    image
                         .resizable()
                         .scaledToFit()
+                        .shadow(radius: 10)
+                } placeholder: {
+                    // Placeholder image or view
                 }
-                .padding([.leading, .trailing], 60)
                 
-                VStack() {
-                    VStack(alignment: .leading) {
-                        Text("Label")
-                            .font(.system(size: 20))
+                ScrollView {
+                    VStack {
+                        HeaderView(countryData: countryData)
                         
-                        Text("Description")
-                            .font(.system(size: 15))
-                    }
-    //                    .foregroundColor(.red)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    
-                    Divider()
-                        .frame(height: 0.5)
-                     .background(Color("AppGray"))
-                    
-                    VStack(alignment: .leading) {
-                        Text("Label 2")
-                            .font(.system(size: 20))
+                        Divider()
+                            .frame(height: 0.5)
+                            .background(Color("AppGray"))
                         
-                        Text("Description")
-                            .font(.system(size: 15))
-                    }
-    //                    .foregroundColor(.red)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    
-                    Divider()
-                        .frame(height: 0.5)
-                     .background(Color("AppGray"))
-                    
-                    VStack(alignment: .leading) {
-                        Text("Label 3")
-                            .font(.system(size: 20))
+                        KeyValueView(key: .constant("Capital"), value: .constant(countryData.capital?.joined(separator: ", ") ?? "N/A"))
                         
-                        Text("Description")
-                            .font(.system(size: 15))
+                        Divider()
+                            .frame(height: 0.5)
+                            .background(Color("AppGray"))
+                        
+                        KeyValueView(key: .constant("Population"), value: .constant("\(countryData.population ?? 0)"))
+                        
+                        Divider()
+                            .frame(height: 0.5)
+                            .background(Color("AppGray"))
+                        
+                        CurrencyView(currencies: countryData.currencies)
+                        
+                        Divider()
+                            .frame(height: 0.5)
+                            .background(Color("AppGray"))
+                        
+                        KeyValueView(key: .constant("Timezone"), value: .constant(countryData.timezones?.joined(separator: ", ") ?? "N/A"))
+                        
+                        Divider()
+                            .frame(height: 0.5)
+                            .background(Color("AppGray"))
+                        
                     }
-    
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
                 }
-                .padding([.leading, .trailing], 35)
-                .padding([.top], 40)
                 
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .padding([.top], 40)
-//            .navigationBarTitle(appLogo, displayMode: .inline)
-            .navigationBarItems(leading: backButton, trailing: appLogo)
+            .padding([.top], 5)
             .navigationBarBackButtonHidden()
-        }
-    }
-    
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-        }) {
-            Image(systemName: "chevron.left")
-                .imageScale(.large)
-        }
-    }
-    
-    var appLogo: some View {
-        HStack() {
-            Spacer()
-            Image("Icon")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 40)
-            Spacer()
         }
     }
 }
 
-struct CountryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        CountryDetailView()
+struct HeaderView: View {
+    var countryData: Country
+    
+    @ObservedObject private var favouritesViewModel = FavouritesViewModel()
+    @ObservedObject private var userState = UserStateViewModel()
+    
+    @State var favourited = false
+    
+    var userId = UserStateViewModel().getUserId()
+    
+    var body: some View {
+        HStack {
+            Image("purple-pin")
+            
+            Text(countryData.name?.common ?? "")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
+                .frame(maxWidth: .infinity)
+            
+            Button(){
+                print(countryData.favourited?.contains(userId) ??  false)
+                
+                if favourited {
+                    favouritesViewModel.delFavouriteCountry(uid: userId, countryId: countryData.id ?? "none")
+                    favourited = !favourited
+                } else {
+                    favouritesViewModel.FavouriteCountry(uid: userId, countryId: countryData.id ?? "none")
+                    favourited = !favourited
+                }
+                
+            } label: {
+                Image(systemName: favourited ? "heart.fill" : "heart")
+                    .foregroundColor(.red)
+                    .imageScale(.large)
+            }
+            .padding()
+            .onAppear {
+                if favouritesViewModel.checkIfFavourited(uid: userId, countryId: countryData.id ?? "none", countryData: countryData) {
+                    favourited = true
+                } else {
+                    favourited = false
+                }
+            }
+        }
     }
 }
+
+struct KeyValueView: View {
+    @Binding var key: String
+    @Binding var value: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(key)
+                .font(.title2)
+            Text(value)
+                .font(.body)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct CurrencyView: View {
+    var currencies: Currency?
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Currency")
+                .font(.title2)
+            
+            HStack {
+                Text(currencies?.name ?? "N/A")
+                    .font(.body).frame(maxWidth: .infinity, alignment: .center)
+                Text(currencies?.symbol ?? "N/A")
+                    .font(.body).frame(maxWidth: .infinity, alignment: .center)
+                Text(currencies?.acronym ?? "N/A")
+                    .font(.body).frame(maxWidth: .infinity, alignment: .center)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+}
+//
+//struct CountryDetailView_Previews: PreviewProvider {
+//    @Binding var countryData: Country
+//    static var previews: some View {
+//
+//        CountryDetailView(data: .constant(countryData))
+//    }
+//}

@@ -6,37 +6,36 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MainNavigation: View {
-    var body: some View {
-        TabView{
-            ContentView()
-            .tabItem{
-                Label("Home", systemImage: "house")
-            }
-            
-//            Text("Countries")
-            LoginView()
-                .tabItem{
-                Label("Countries", systemImage: "globe.europe.africa")
-            }
-            
-            CountryDetailView()
-            .tabItem{
-                Label("Favorites", systemImage: "heart")
-            }
-            
-            FeedView()
-            .tabItem{
-                Label("Feed", systemImage: "note.text")
-            }
-        }
-    }
-}
+    @State private var selectedTab: Int = 0
 
-struct MainNavigation_Previews: PreviewProvider {
-    static var previews: some View {
-        MainNavigation()
-          
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            ContentView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+                .tag(0)
+
+            AddPostView(selectedTab: $selectedTab)
+                .tabItem {
+                    Label("New Post", systemImage: "plus.circle.fill")
+                }
+                .tag(1)
+
+            FavouritesView()
+                .tabItem {
+                    Label("Favorites", systemImage: "heart")
+                }
+                .tag(2)
+
+            FeedView()
+                .tabItem {
+                    Label("Feed", systemImage: "note.text")
+                }
+                .tag(3)
+        }
     }
 }

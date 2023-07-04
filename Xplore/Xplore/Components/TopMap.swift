@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopMap: View {
     @State var bouncePin = false
+    @State private var scale: CGFloat = 1.0
     
     var body: some View {
         VStack() {
@@ -16,36 +17,30 @@ struct TopMap: View {
                 Image("map")
                 
                 Image("purple-pin")
-                    .offset(x: 90, y: bouncePin ? -70 : -60)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
-                Image("shadow")
-                    .offset(x: 115, y: -20)
-                    
+                    .offset(x: 90, y: -70)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
         
                 Image("yellow-pin")
-                    .offset(x: -60, y: bouncePin ? 10 : 20)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
-                Image("shadow")
-                    .offset(x: -35, y: 50)
+                    .offset(x: -60, y: 20)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
             
                 Image("light-blue-pin")
-                    .offset(x: 0, y: bouncePin ? -30 : -40)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
-                Image("shadow")
-                    .offset(x: 25, y: 10)
+                    .offset(x: 0, y: -40)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
                 
                 Image("dark-blue-pin")
-                    .offset(x: 140, y: bouncePin ? 30 : 20)
-                    .animation(Animation.easeInOut(duration: 1.0).repeatForever())
-                Image("shadow")
-                    .offset(x: 165, y: 60)
-            
+                    .offset(x: 140, y: 20)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(), value: scale)
             }
         }
-        .onAppear {
-            bouncePin = true
-        }
         .padding(.top)
+        .onAppear {
+            scale = 1.1
+        }
     }
 }
 

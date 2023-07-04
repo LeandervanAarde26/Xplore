@@ -6,63 +6,110 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LoginView: View {
     
-    @State var Error = ""
-    @State var Email = ""
-    @State var Password = ""
+    @StateObject private var logModel = InputLogData()
+    @StateObject private var errModel = InputErrors()
+    @EnvironmentObject var userVM: UserStateViewModel
+    
+    func Login() async {
+        
+        errModel.emailError = ""
+        errModel.passwordError = ""
+        
+        if logModel.Email.isEmpty {
+            errModel.emailError = "Please enter your email"
+        }
+        
+        if logModel.Password.isEmpty {
+            errModel.passwordError = "Please enter your password"
+        }
+        
+        if logModel.Password.isEmpty || logModel.Email.isEmpty {
+            return
+        }
+        
+        await userVM.Login(email: logModel.Email, password: logModel.Password)
+        
+        if userVM.errorMessage == "The email address is badly formatted." {
+            logModel.Email = "Invalid email address"
+        }
+    }
 
     var body: some View {
-        VStack(){
-            Image("Icon")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 140, alignment: .center)
-                .padding(15)
-            
-            TopMap()
-            
-            HStack(spacing: 60){
-                Image("purple-pin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 25)
-                Text("Login")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
-            }.padding(.top, 40)
-            
-            Spacer()
-            
-            VStackLayout(spacing: 40){
-                TextFieldComp(textInput: .constant(Email),
-                              failed: .constant("true"),
-                              placeholder: .constant("email"))
-                TextFieldComp(textInput: .constant(Password),
-                              failed: .constant("false"),
-                              placeholder: .constant("password"))
+        if userVM.isBusy {
+            ProgressView()
+        } else {
+            NavigationView(){
+                VStack(){
+                    Image("Icon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 140, alignment: .center)
+                        .padding(15)
+                    
+                    TopMap()
+                        .frame(height:220)
+                    
+                    HStack(spacing: 60){
+                        Image("purple-pin")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25)
+                        Text("Login")
+                            .font(.system(.title, weight: .bold))
+                            .foregroundColor(Color(red: 0, green: 0.19, blue: 0.53))
+                    }
+                    
+                    Spacer()
+                    
+                    VStackLayout(spacing: 40){
+                        TextFieldComp(textInput: $logModel.Email,
+                                      failed: $errModel.errIcon,
+                                      placeholder: .constant("email"),
+                                      errorMessage: $errModel.emailError,
+                                      type: .constant("email"))
+                        TextFieldComp(textInput: $logModel.Password,
+                                      failed: $errModel.errIcon,
+                                      placeholder: .constant("password"),
+                                      errorMessage: $errModel.passwordError,
+                                      type: .constant("pass"))
+                    }
+                    
+                    Spacer()
+                    
+                    Text(userVM.errorMessage)
+                        .foregroundColor(Color.red)
+                        .padding(10)
+                    
+                    Button(){
+                        Task {
+                            await Login()
+                        }
+                    } label: {
+                        Text("Login")
+                            .bold()
+                            .foregroundStyle(.white)
+                            .frame(width: 250, alignment: .center)
+                            .padding(.horizontal, 35)
+                            .padding(.vertical, 14)
+                            .background(Color(red: 0.48, green: 0.53, blue: 0.95))
+                            .cornerRadius(10)
+                            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
+                            .padding()
+                    }
+
+                    Button() {
+                        userVM.isLoginView = false
+                    } label: {
+                        Text("Don't have an account?")
+                            .foregroundColor(.blue)
+                    }
+                }
+                Spacer()
             }
-            
-            Spacer()
-            
-            Text(Error)
-                .foregroundColor(Color.red)
-                .padding( 15)
-            
-            Button(){}label: {
-                Text("Login").bold()
-            }
-                .foregroundStyle(.white)
-                .frame(width: 250, alignment: .center)
-                .padding(.horizontal, 35)
-                .padding(.vertical, 14)
-                .background(Color(red: 0.48, green: 0.53, blue: 0.95))
-                .cornerRadius(10)
-                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
-            
-            Spacer()
-            
         }
     }
 }

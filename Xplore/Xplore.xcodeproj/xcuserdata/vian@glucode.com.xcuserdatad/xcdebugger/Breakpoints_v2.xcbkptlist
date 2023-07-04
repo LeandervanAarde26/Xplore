@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "359A316F-D719-4FAE-A6C8-C97CE87231DF"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B6825072-2344-4E8B-BD12-B625CF78859F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Xplore/Views/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "ContentView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "B6825072-2344-4E8B-BD12-B625CF78859F - 4ec78a33631c3c18"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Xplore.ContentView.userVM : Xplore.UserStateViewModel"
+                  moduleName = "Xplore"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vian@glucode.com/Documents/GitHub/Xplore/Xplore/Xplore/Views/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "B6825072-2344-4E8B-BD12-B625CF78859F - 30682dfdf454ed96"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Xplore.ContentView.init() -&gt; Xplore.ContentView"
+                  moduleName = "Xplore"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vian@glucode.com/Documents/GitHub/Xplore/Xplore/Xplore/Views/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "412">
+               </Location>
+               <Location
+                  uuid = "B6825072-2344-4E8B-BD12-B625CF78859F - 7a60eaab7592c022"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Xplore.ContentView.init(randomCountryIndexNumber: Swift.Int, searchTerm: Swift.String) -&gt; Xplore.ContentView"
+                  moduleName = "Xplore"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vian@glucode.com/Documents/GitHub/Xplore/Xplore/Xplore/Views/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "215">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

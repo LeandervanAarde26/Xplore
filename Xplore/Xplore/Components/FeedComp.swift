@@ -13,27 +13,35 @@ struct FeedComp: View {
     @Binding var Username: String
     @Binding var UserImage: String
     @Binding var CountryName: String
-    
+    @Binding var CountryImage: String
     var body: some View {
         VStack(){
             HStack(spacing: 10){
                 
-                Image("SAFLAG")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 45)
-                    .clipShape(Circle())
+                AsyncImage(url: URL(string: UserImage)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 45)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Text("...")
+                }
                 
                 Text(Username)
                     .font(.headline)
-                
-            }.frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 5)
-            
-            Image("SAFLAG")
-                .resizable()
-                .frame(width: .infinity, height: 240)
-                .scaledToFit()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 5)
+
+            AsyncImage(url: URL(string: CountryImage)) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                Text("Loading image...")
+            }
             
             Text(Desc)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -51,8 +59,8 @@ struct FeedComp: View {
     }
 }
 
-struct FeedComp_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedComp(ContextualType: .constant(""), Desc: .constant("Description"), Username: .constant("Username"), UserImage: .constant(""), CountryName: .constant("Country Name"))
-    }
-}
+//struct FeedComp_Previews: PreviewProvider {
+////    static var previews: some View {
+////        FeedComp(ContextualType: .constant(""), Desc: .constant("Description"), Username: .constant("Username"), UserImage: .constant(""), CountryName: .constant("Country Name", ))
+////    }
+//}

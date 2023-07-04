@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FavouritesView: View {
+    @EnvironmentObject var userVM: UserStateViewModel
+    @StateObject private var favoriteCountries = Favorites()
+    
     var body: some View {
         VStack(){
             HStack(alignment: VerticalAlignment.center){
@@ -36,35 +39,98 @@ struct FavouritesView: View {
                 
                 Spacer()
                 
-            }.padding(.top, 10)
-                .padding(.bottom, 20)
+            }
+            .padding(.top, 10)
+            .padding(.bottom, 20)
             
-            ScrollView(){
+            HStack {
+                AsyncImage(url: URL(string: userVM.userDetails?.profileURL ?? "")) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 70)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Image(systemName: userVM.userDetails?.profileURL != nil ? "person.crop.circle" : "")
+                        .font(.system(size: 50))
+                        .scaledToFit()
+                        .frame(maxHeight: 70)
+                        .clipShape(Circle())
+                        .aspectRatio(contentMode: .fit)
+                }
+                
+                Spacer()
+                
+                Text(userVM.userDetails?.username ?? "No username found")
+                
+                Spacer()
+                
+                Button(){
+                    userVM.signOutUser()
+                } label: {
+                    Text("Logout")
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical, 5)
+                        .background(Color(.red))
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
+                }
+            }
+            .padding(10)
+            
+//            ScrollView(){
                 VStack(spacing: 35){
-                    ForEach(0..<10) {
-                        Divider()
-                        FavoritesCard(Country: .constant("Country Name"),
-                                      SmallInfo: .constant("Smallinfo"),
-                                      ContextualType: .constant("Test \($0)"))
-                    }
-                    
-                }.frame(
+                    List {
+                        ForEach(favoriteCountries.favorites.indices, id: \.self) { index in
+                            let fav = favoriteCountries.favorites[index]
+                            
+                            if let countryName = fav.name?.common,
+                                let region = fav.subregion,
+                                let docID = fav.id,
+                                let flag = fav.flags?.png
+                            {
+                                FavoritesCard(
+                                    Country: .constant(countryName),
+                                    SmallInfo: .constant(region),
+                                    ContextualType: .constant("Test \(index)"),
+                                    CountryImage: .constant(flag),
+                                    CountryId: .constant(docID)
+                                )
+                            }
+                        }
+                        .onDelete { indices in
+                            for index in indices {
+                                let fav = favoriteCountries.favorites[index]
+                                if let docID = fav.id {
+                                    favoriteCountries.removeFromFavorites(uid: docID)
+                                }
+                            }
+                        }
+                   
+                }
+                .listStyle(PlainListStyle())
+                .onAppear() {
+                    self.favoriteCountries.fetchData()
+                }
+                .frame(
                     minWidth: 0,
                     maxWidth: .infinity,
                     minHeight: 0,
                     maxHeight: .infinity,
                     alignment: .topLeading
                 )
-            }
+//            }
             
             Spacer()
-            
+        }
         }
     }
 }
 
-struct FavouritesView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavouritesView()
-    }
-}
+//struct FavouritesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FavouritesView()
+//    }
+//}
